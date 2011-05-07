@@ -4,6 +4,10 @@ import urllib
 import simplejson
 
 class WikimediaSuggest:
+    '''
+    API used:
+    #http://commons.wikimedia.org/w/api.php?action=opensearch&search=pakistan&limit=20
+    '''
     def __init__(self, query, limit = "20"):
         self.args = {
             "search" : query ,
@@ -28,9 +32,14 @@ class Wikimedia:
     '''
     MAX = 80
     def __init__(self, query, images = MAX):
+        '''
+        query has to wikimedia article title not any search term
+        '''
         self.args = {
             "action" : "query" ,
-            "prop" : "images" ,
+            "generator" : "images" ,
+            "prop" : "imageinfo" ,
+            "iiprop" : "url" ,
             "titles" : query ,
             "format" : "json" ,
         }
@@ -40,31 +49,8 @@ class Wikimedia:
 
     def search(self):
         '''
-        generates absolute path for each image
-        '''
-        images = self.get_images()
-        toreturn = []
-        self.args = {
-            "action" : "query" ,
-            "prop" : "imageinfo" ,
-            "iiprop" : "url" ,
-            "format" : "json" ,
-        }
-        
-        #http://commons.wikimedia.org/w/api.php?action=query&titles=File:Pakistan%20Int%20AL%20B777-200ER%20AP-BGL.jpg&prop=imageinfo&iiprop=url&format=json
-        for image in images:
-            self.args["titles"] = image
-            url = "http://commons.wikimedia.org/w/api.php?" + urllib.urlencode(self.args)
-            search_results = urllib.urlopen(url)
-            json = simplejson.loads(search_results.read())
-            temp = json["query"]["pages"].values()[0]["imageinfo"][0]
-            toreturn.append([temp["url"], temp["descriptionurl"]] )
-
-        return toreturn
-    
-    def get_images(self):
-        '''
-        fetches images (not obsolute path) for the given query, query must be a string representing wikimedia page. such string can be obtained by WikimediaSuggest
+        uses this url:
+        http://commons.wikimedia.org/w/api.php?action=query&generator=images&titles=Pakistan%20International%20Airlines&format=xml&prop=imageinfo&iiprop=url
         '''
         toreturn = []
         count = 0
@@ -85,22 +71,17 @@ class Wikimedia:
         toreturn = {"images" : []}
         search_results = urllib.urlopen(url)
         json = simplejson.loads(search_results.read())
-        images = json["query"]["pages"].values()[0]["images"]
+        images = json["query"]["pages"].values()
         for image in images:
-            toreturn["images"].append( image["title"] ) 
+            toreturn["images"].append( image["imageinfo"][0]["url"] ) #we should show image["imageinfo"][0]["descriptionurl"] for credits to user
         try:
-            toreturn["next"] = json["query-continue"]["images"]["imcontinue"]
+            toreturn["next"] = json["query-continue"]["images"]["gimcontinue"]
         except:
             toreturn["next"] = None
 
         return toreturn
 
 
-#http://commons.wikimedia.org/w/api.php?action=opensearch&search=pakistan&limit=20
-
-#http://commons.wikimedia.org/w/api.php?action=query&prop=images&titles=Pakistan%20International%20Airlines&format=xml
-
-#http://commons.wikimedia.org/w/api.php?action=query&titles=File:Pakistan%20Int%20AL%20B777-200ER%20AP-BGL.jpg&prop=imageinfo&iiprop=url
 
 w = Wikimedia("Pakistan International Airlines")
 print w.results
