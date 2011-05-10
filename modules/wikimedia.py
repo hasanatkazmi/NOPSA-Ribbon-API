@@ -83,6 +83,8 @@ class Search(SearchBase):
 
         images = json["query"]["pages"].values()
         for image in images:
+            if not isinstance(image["imageinfo"][0]["url"], unicode):
+                image["imageinfo"][0]["url"] = image["imageinfo"][0]["url"].decode("utf-8")
             toreturn["images"].append( image["imageinfo"][0]["url"] ) #we should show image["imageinfo"][0]["descriptionurl"] for credits to user
         try:
             toreturn["next"] = json["query-continue"]["images"]["gimcontinue"]
@@ -96,7 +98,7 @@ if __name__ == "__main__":
     #w = Wikimedia("Pakistan International Airlines")
     #print w.results
 
-    w = Search("Pakistan")
+    w = Search("Pakistan International Airlines")
     print w.results
 
     #for sc in SuggestBase.__subclasses__():

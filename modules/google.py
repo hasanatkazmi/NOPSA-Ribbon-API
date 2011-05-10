@@ -2,6 +2,7 @@
 
 import urllib
 import simplejson
+from xml.dom import minidom 
 
 from base import SuggestBase, SearchBase
 
@@ -39,10 +40,39 @@ class Search(SearchBase):
         if response is None: return [] #results have ended
         results = json["responseData"]["results"]
         #print json["responseData"]["cursor"]["pages"]
+        if not isinstance(image["url"], unicode): 
+            image["url"] = image["url"].decode("utf-8")
         return [[ image["url"], image["height"], image["width"] ] for image in results]
         
 
+
+
+class Suggest(SuggestBase):
+    '''
+    http://google.com/complete/search?output=toolbar&q=pakistan
+    '''    
+    
+    #argument limit will be ignored but follows protocol
+    def __init__(self, query, limit = "20"):
+        self.args = {
+            "q" : query ,
+            "output" : "toolbar" ,
+        }
+        self.results = self.search()
+
+
+    def search(self):
+        url = "http://google.com/complete/search?" + urllib.urlencode(self.args)
+        search_results = urllib.urlopen(url)
+        dom = minidom.parseString(search_results.read())
+        toreturn = list()
+        for i in dom.getElementsByTagName("suggestion"):
+            toreturn.append( i.getAttributeNode('data').value )
+
+        return toreturn
+
+
 if __name__ == "__main__":
-    w = Google("pakistan")
+    w = Suggest("pakistan")
     print w.results
 

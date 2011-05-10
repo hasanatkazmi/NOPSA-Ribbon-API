@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import urllib
-import simplejson
+from xml.dom import minidom 
 
 from base import SuggestBase, SearchBase
 
@@ -23,22 +23,50 @@ class Search(SearchBase):
             "output_type" : "xml" ,
             "yt1" : "Query" ,
         }
-        self.search()
+        self.results = self.search()
        
 
     def search(self):
         url = "http://nopsa.hiit.fi/index.php/api/search?" + urllib.urlencode(self.args)
         search_results = urllib.urlopen(url)
-        self.results = search_results.read()
-        #json = simplejson.loads(search_results.read())
-        #response = json["responseData"]
-        #if response is None: return [] #results have ended
-        #results = json["responseData"]["results"]
-        #print json["responseData"]["cursor"]["pages"]
-        #return [[ image["url"], image["height"], image["width"] ] for image in results]
+        dom = minidom.parseString(search_results.read())
+        toreturn = list()
+        for i in dom.getElementsByTagName("file"):
+            toreturn.append( [
+                        i.getElementsByTagName("baseName")[0].childNodes[0].data.replace("photo", "http://nopsa.hiit.fi/images/square") ,
+                        i.getElementsByTagName("originalSource")[0].childNodes[0].data
+                            ])
+
+        return toreturn
      
 
+class Suggest(SuggestBase):
+    '''
+    http://nopsa.hiit.fi/index.php/ontology/getHyponyms?lemma=coach&format=xml
+    '''    
+    
+    #argument limit will be ignored but follows protocol
+    def __init__(self, query, limit = "20"):
+        self.args = {
+            "lemma" : query ,
+            "format" : "xml" ,
+        }
+        self.results = self.search()
+
+
+    def search(self):
+        url = "http://nopsa.hiit.fi/index.php/ontology/getHyponyms?" + urllib.urlencode(self.args)
+        search_results = urllib.urlopen(url)
+        dom = minidom.parseString(search_results.read())
+        toreturn = list()
+        for i in dom.getElementsByTagName("hyponym"):
+            toreturn.append( i.childNodes[0].data )
+
+        return toreturn
+
 if __name__ == "__main__":
-    w = Nopsa("pakistan")
-    print w.results
+    #w = Search("pakistan")
+    #print w.results
+    t = Suggest("dog")
+    print t.results
 
