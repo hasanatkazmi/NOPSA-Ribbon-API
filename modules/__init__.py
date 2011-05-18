@@ -8,7 +8,7 @@ This file MUST be updated after writing a new module
 from base import SuggestBase, SearchBase
 #from wikimedia import Suggest, Search
 #from google import Search
-import wikimedia, google
+import wikimedia, google, nopsa, loc
 
 #searchModules = list()
 #suggestionModules = list()

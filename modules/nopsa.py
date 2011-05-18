@@ -33,7 +33,7 @@ class Search(SearchBase):
         toreturn = list()
         for i in dom.getElementsByTagName("file"):
             toreturn.append( [
-                        i.getElementsByTagName("baseName")[0].childNodes[0].data.replace("photo", "http://nopsa.hiit.fi/images/square") ,
+                        i.getElementsByTagName("baseName")[0].childNodes[0].data.replace("photo", "http://nopsa.hiit.fi/images/square") , #adding in this manner is a bad habbit but can't help.. no API for this avaliable.
                         i.getElementsByTagName("originalSource")[0].childNodes[0].data
                             ])
 
@@ -65,8 +65,8 @@ class Suggest(SuggestBase):
         return toreturn
 
 if __name__ == "__main__":
-    #w = Search("pakistan")
-    #print w.results
-    t = Suggest("dog")
-    print t.results
+    w = Search("pakistan")
+    print w.results
+    #t = Suggest("dog")
+    #print t.results
 

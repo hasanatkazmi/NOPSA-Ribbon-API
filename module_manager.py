@@ -22,7 +22,7 @@ class Driver(object):
             obj = eval("modules."+module)
             if "Search" in dir(obj):
                 self.searchModules.append(obj)
-            elif "Suggest" in dir(obj):
+            if "Suggest" in dir(obj):
                 self.suggestModules.append(obj)
 
                 #temp = obj.Search("Pakistan")
@@ -33,4 +33,6 @@ class Driver(object):
 
 if __name__ == "__main__":
     w = Driver()
-    
+    print len(w.searchModules)
+    print len(w.suggestModules)
+
