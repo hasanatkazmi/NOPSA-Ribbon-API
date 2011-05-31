@@ -15,7 +15,7 @@ class SuggestBase(object):
     this should save results of API call after it has finished. resutls should have following format:
     results is a list of unicode strings i.e. [u'one', u'two', .....]
     '''
-    results = "" 
+    results = []
 
     @abc.abstractmethod
     def __init__(self, query, limit):
@@ -36,9 +36,21 @@ class SearchBase(object):
 
     '''
     this should save results of API call after it has finished. resutls should have following format:
-    FORMAT YET HAS TO BE DECIDED UPON
+    whereas each member of resutls MUST be a result type (result is a dictionary with default items and their values, result is defined below
     '''
-    results = "" 
+    results = [] 
+
+    '''
+    create a soft copy of result and CRUD on it and add in results, look at some current implementation for example
+    '''
+    result = {
+            'url'  :   u''  , #url of the image (absolute url, no html encoding, utf-d)
+            'height'  :   None  ,
+            'width'  :   None  ,
+            'contexturl'  :   u''  , #page where image is located
+            'rights'  :   u''  , #known copy rights on the image
+            'creator'  :   u''  , #creator / photographer of the image
+                }
 
     @abc.abstractmethod
     def __init__(self, query, images):

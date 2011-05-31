@@ -3,6 +3,7 @@
 import urllib
 import simplejson
 from xml.dom import minidom 
+import copy
 
 from base import SuggestBase, SearchBase
 
@@ -40,10 +41,23 @@ class Search(SearchBase):
         if response is None: return [] #results have ended
         results = json["responseData"]["results"]
         #print json["responseData"]["cursor"]["pages"]
-        if not isinstance(image["url"], unicode): 
-            image["url"] = image["url"].decode("utf-8")
-        return [[ image["url"], image["height"], image["width"] ] for image in results]
+        for image in results:
+            #print image['originalContextUrl']
+            if not isinstance(image["url"], unicode): 
+                image["url"] = image["url"].decode("utf-8")
+        #return [[ image["url"], image["height"], image["width"], image["originalContextUrl"] ] for image in results]
+        toreturn = []
+        for image in results:
+            my_result = copy.copy(self.result)
+            my_result["url"] = image["url"]
+            my_result["height"] = image["height"]
+            my_result["width"] = image["width"]
+            my_result["contexturl"] = image["originalContextUrl"]
+            my_result["rights"] = image["Creative Commons"]
+    
+            toreturn.append( my_result )
         
+        return toreturn
 
 
 
@@ -73,6 +87,8 @@ class Suggest(SuggestBase):
 
 
 if __name__ == "__main__":
-    w = Suggest("pakistan")
+    #w = Suggest("pakistan")
+    #print w.results
+    w = Search("pakistan")
     print w.results
 

@@ -2,6 +2,7 @@
 
 import urllib
 from xml.dom import minidom 
+import copy
 
 from base import SuggestBase, SearchBase
 
@@ -32,10 +33,16 @@ class Search(SearchBase):
         dom = minidom.parseString(search_results.read())
         toreturn = list()
         for i in dom.getElementsByTagName("file"):
-            toreturn.append( [
-                        i.getElementsByTagName("baseName")[0].childNodes[0].data.replace("photo", "http://nopsa.hiit.fi/images/square") , #adding in this manner is a bad habbit but can't help.. no API for this avaliable.
-                        i.getElementsByTagName("originalSource")[0].childNodes[0].data
-                            ])
+            #toreturn.append( [
+            #            i.getElementsByTagName("baseName")[0].childNodes[0].data.replace("photo", "http://nopsa.hiit.fi/images/square") , #adding in this manner is a bad habbit but can't help.. no API for this avaliable.
+            #            i.getElementsByTagName("originalSource")[0].childNodes[0].data
+            #                ])
+            my_result = copy.copy(self.result)
+            my_result["url"] = i.getElementsByTagName("baseName")[0].childNodes[0].data.replace("photo", "http://nopsa.hiit.fi/images/square") , #adding in this manner is a bad habbit but can't help.. no API for this avaliable.
+            my_result["contexturl"] = i.getElementsByTagName("originalSource")[0].childNodes[0].data
+            my_result["rights"] = "Creative Commons"
+
+            toreturn.append(my_result)
 
         return toreturn
      

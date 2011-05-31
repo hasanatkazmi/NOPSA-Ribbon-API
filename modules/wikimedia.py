@@ -2,7 +2,7 @@
 
 import urllib
 import simplejson
-
+import copy
 from base import SuggestBase, SearchBase
 
 class Suggest(SuggestBase):
@@ -85,7 +85,14 @@ class Search(SearchBase):
         for image in images:
             if not isinstance(image["imageinfo"][0]["url"], unicode):
                 image["imageinfo"][0]["url"] = image["imageinfo"][0]["url"].decode("utf-8")
-            toreturn["images"].append( image["imageinfo"][0]["url"] ) #we should show image["imageinfo"][0]["descriptionurl"] for credits to user
+            #toreturn["images"].append( image["imageinfo"][0]["url"] ) #we should show image["imageinfo"][0]["descriptionurl"] for credits to user
+            my_result = copy.copy(self.result)
+            my_result["url"] = image["imageinfo"][0]["url"]
+            my_result["contexturl"] = image["imageinfo"][0]["descriptionurl"]
+            my_result["rights"] = "Creative Commons"
+
+            toreturn["images"].append( my_result )
+
         try:
             toreturn["next"] = json["query-continue"]["images"]["gimcontinue"]
         except:
