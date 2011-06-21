@@ -38,7 +38,12 @@ class LoadModules(object):
 
 
 
-class DriveSuggest(object): # there is no point to save suggestions in database etc... client shouldn't call it very often.. thats the key
+class DriveSuggest(object): 
+    '''
+    there is no point to save suggestions in database etc... client shouldn't call it very often.. thats the key
+    but in future we can add memcache layer to make it faster
+    this class is a bit generic and also has some funtionality which isn't being used by tornado. But command line access may beed it in future 
+    '''
 
     counter = 0
 

@@ -116,9 +116,14 @@ import os
 #statically loading modules
 w = LoadModules()
 
+#this is IOloop instance we would use to push data to client
+ioloop_instance = tornado.ioloop.IOLoop.instance()
+
 
 from xml.dom.minidom import parse, parseString
 from xml.parsers.expat import ExpatError
+from time import sleep
+import thread
 
 class ParseAndExec(object):
     '''
@@ -137,6 +142,21 @@ class ParseAndExec(object):
         self.websocketHandler.write_message( u'<?xml version="1.0" ?> <error code="' + str(errorCode) + '">' )
 
     def go(self):
+        '''
+        This is time cosuming funtion, it takes modules times each http call to return data (calls go_module [which takes time to run] modules times)
+        '''
+
+        def go_module(data, module):
+            '''
+            'go' for each module | time taking funtion. runs in seperate thread
+            '''
+            s = DriveSuggest(w, data, returntype = 'xml', module = module)
+            result = s.result()
+            if not result is None:
+               #data flushes out immedietly
+               self.websocketHandler.write_message( result )
+
+
         dom = ''
         try:
             dom = parseString(self.xml)
@@ -168,14 +188,8 @@ class ParseAndExec(object):
                 data = self.nodes[0].childNodes[0].data
                 
                 for i in range(len(w.suggestModules)):
-                    #this call should be made non blocking
-                    s = DriveSuggest(w, data, returntype = 'xml', module = w.suggestModules[i])
-                    result = s.result()
-                    if not result is None:
-                        #this should be flushed out 
-                        self.websocketHandler.write_message( result )
-                        
-
+                    #this is non blocking as it makes each module run in seperate thread
+                    thread.start_new_thread(go_module, ((data, w.suggestModules[i])))
 
             else:
                 self.handleError( self.NODE_TYPE_UNKNOWN )
@@ -217,5 +231,5 @@ if __name__ == "__main__":
     tornado.options.log_file_prefix = "NOPSA" #loggin issues not resolved yet
     tornado.options.parse_command_line()
     application.listen(8000)
-    tornado.ioloop.IOLoop.instance().start()
+    ioloop_instance.start()
 
