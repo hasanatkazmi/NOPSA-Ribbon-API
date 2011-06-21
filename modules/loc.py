@@ -10,6 +10,8 @@ import copy
 
 #Currently not implementing suggest.. API needs to be looked into.
 
+name = "loc"
+
 class Search(SearchBase):
     '''
     '''
@@ -22,11 +24,11 @@ class Search(SearchBase):
         NOTIC: query attribute if added here will break in search funtion because urlencode will also encode spaces etc which is against SRU's methods. So query attribute is added in search seperatly
         '''
         self.args = {
-            "operation" : "searchRetrieve" ,
-            "version" : "1.1" ,
-            "recordSchema" : "dc" ,
-            "startRecord" : "1" ,
-            "maximumRecords" : images ,
+            u"operation" : u"searchRetrieve" ,
+            u"version" : u"1.1" ,
+            u"recordSchema" : u"dc" ,
+            u"startRecord" : u"1" ,
+            u"maximumRecords" : images.encode('utf-8') ,
         }
         self.query = query
         self.results = self.search()
@@ -37,7 +39,7 @@ class Search(SearchBase):
 
         '''
         #url = "http://lx2.loc.gov:210/LCDB?" + urllib.urlencode(self.args) + "&query=" + "dc.title=\"" + self.query + "\" and dc.resourceType=graphic"
-        url =  "http://lx2.loc.gov:210/LCDB?" + urllib.urlencode(self.args) + "&query=" + "dc.title=%22" + self.query.replace(" ","%20") + "%22%20and%20dc.resourceType=graphic"
+        url =  u"http://lx2.loc.gov:210/LCDB?" + urllib.urlencode(self.args) + u"&query=" + u"dc.title=%22" + self.query.replace(" ","%20") + u"%22%20and%20dc.resourceType=graphic"
         #url = "http://lx2.loc.gov:210/LCDB?startRecord=1&operation=searchRetrieve&version=1.1&maximumRecords=10&recordSchema=dc&query=dc.title=%22abraham%20lincoln%22%20and%20dc.resourceType=graphic"
         #print url
         #search_results = urllib.urlopen(url)

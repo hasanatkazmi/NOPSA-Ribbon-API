@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import urllib
 import simplejson
@@ -6,6 +7,8 @@ from xml.dom import minidom
 import copy
 
 from base import SuggestBase, SearchBase
+
+name = "google"
 
 class Search(SearchBase):
     '''
@@ -15,9 +18,9 @@ class Search(SearchBase):
     cursor = 0
     def __init__(self, query, images = MAX):
         self.args = {
-            "q" : query ,
-            "as_rights" : "(cc_publicdomain|cc_attribute|cc_sharealike|cc_noncommercial|cc_nonderived)" ,
-            "rsz" : "8" ,
+            u"q" : query.encode('utf-8') ,
+            u"as_rights" : u"(cc_publicdomain|cc_attribute|cc_sharealike|cc_noncommercial|cc_nonderived)" ,
+            u"rsz" : u"8" ,
         }
         self.search()
        
@@ -26,7 +29,7 @@ class Search(SearchBase):
         results = []
         for page in range(0, self.MAX, 8):
             self.args["start"]=str(page)
-            url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&" + urllib.urlencode(self.args)
+            url = u"http://ajax.googleapis.com/ajax/services/search/images?v=1.0&" + urllib.urlencode(self.args)
             pageresult = self.nextpage(url)
             if pageresult == []: break
             results.append(pageresult)
@@ -69,14 +72,14 @@ class Suggest(SuggestBase):
     #argument limit will be ignored but follows protocol
     def __init__(self, query, limit = "20"):
         self.args = {
-            "q" : query ,
-            "output" : "toolbar" ,
+            u"q" : query.encode('utf-8') ,
+            u"output" : u"toolbar" ,
         }
         self.results = self.search()
 
 
     def search(self):
-        url = "http://google.com/complete/search?" + urllib.urlencode(self.args)
+        url = u"http://google.com/complete/search?" + urllib.urlencode(self.args)
         search_results = urllib.urlopen(url)
         dom = minidom.parseString(search_results.read())
         toreturn = list()
@@ -87,8 +90,10 @@ class Suggest(SuggestBase):
 
 
 if __name__ == "__main__":
-    #w = Suggest("pakistan")
-    #print w.results
-    w = Search("pakistan")
+    #s = unicode(u"پاکِستان" ,'utf-8' )
+    #s.decode('utf-8')
+    s = u'پاکِستان'
+    s.decode('utf-8')
+    w = Suggest( s )
     print w.results
 

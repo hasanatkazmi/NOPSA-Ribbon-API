@@ -6,6 +6,8 @@ import copy
 
 from base import SuggestBase, SearchBase
 
+name = "nopsa"
+
 class Search(SearchBase):
     '''
     For Search Only. No suggestions
@@ -14,15 +16,15 @@ class Search(SearchBase):
     def __init__(self, query, images = MAX):
         #http://nopsa.hiit.fi/index.php/api/search?apikey=37461832B01D9696&tags=%2Blahore&order_attr=rank&mode=any&per_page=&page=1&encoding=html&output_type=xml&yt1=Query
         self.args = {
-            "apikey" : "37461832B01D9696",
-            "tags" : "+"+query , #why do we put '+' ?
-            "order_attr" : "rank" ,
-            "mode" : "any" ,
-            "per_page" : str(images) ,
-            "page" : "1" ,
-            "encoding" : "html" ,
-            "output_type" : "xml" ,
-            "yt1" : "Query" ,
+            u"apikey" : u"37461832B01D9696",
+            u"tags" : u"+"+query.encode('utf-8') , #why do we put '+' ?
+            u"order_attr" : u"rank" ,
+            u"mode" : u"any" ,
+            u"per_page" : str(images).encode('utf-8') ,
+            u"page" : u"1" ,
+            u"encoding" : u"html" ,
+            u"output_type" : u"xml" ,
+            u"yt1" : u"Query" ,
         }
         self.results = self.search()
        
@@ -49,20 +51,20 @@ class Search(SearchBase):
 
 class Suggest(SuggestBase):
     '''
-    http://nopsa.hiit.fi/index.php/ontology/getHyponyms?lemma=coach&format=xml
+    http://nopsa.hiit.fi/pmg/index.php/ontology/getHyponyms?lemma=coach&format=xml
     '''    
     
     #argument limit will be ignored but follows protocol
     def __init__(self, query, limit = "20"):
         self.args = {
-            "lemma" : query ,
-            "format" : "xml" ,
+            u"lemma" : query.encode('utf-8') ,
+            u"format" : u"xml" ,
         }
         self.results = self.search()
 
 
     def search(self):
-        url = "http://nopsa.hiit.fi/index.php/ontology/getHyponyms?" + urllib.urlencode(self.args)
+        url = u"http://nopsa.hiit.fi/pmg/index.php/ontology/getHyponyms?" + urllib.urlencode(self.args)
         search_results = urllib.urlopen(url)
         dom = minidom.parseString(search_results.read())
         toreturn = list()

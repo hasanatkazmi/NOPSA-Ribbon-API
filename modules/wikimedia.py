@@ -5,6 +5,8 @@ import simplejson
 import copy
 from base import SuggestBase, SearchBase
 
+name = "wikimedia"
+
 class Suggest(SuggestBase):
     '''
     API used:
@@ -12,16 +14,16 @@ class Suggest(SuggestBase):
     '''    
     def __init__(self, query, limit = "20"):
         self.args = {
-            "search" : query ,
-            "action" : "opensearch" ,
-            "limit" : limit ,
+            u"search" : query.encode('utf-8') ,
+            u"action" : u"opensearch" ,
+            u"limit" : limit.encode('utf-8') ,
         }
         self.query = query
         self.results = self.search()
 
 
     def search(self):
-        url = "http://commons.wikimedia.org/w/api.php?" + urllib.urlencode(self.args)
+        url = u"http://commons.wikimedia.org/w/api.php?" + urllib.urlencode(self.args)
         search_results = urllib.urlopen(url)
         json = simplejson.loads(search_results.read())
         response = json[1]

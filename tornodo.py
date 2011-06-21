@@ -2,6 +2,7 @@
 
 import tornado.ioloop
 import tornado.web
+import tornado.websocket
 
 class MainHandler(tornado.web.RequestHandler):
     html = '''<html><body>
@@ -105,10 +106,116 @@ class MainHandler(tornado.web.RequestHandler):
             #for i in w.results:
             #    self.write("<p>" + i + "</p>")
 
+##################################
+##################################
+
+from module_manager import DriveSuggest, LoadModules
+from xml.dom.minidom import Document
+import os
+
+#statically loading modules
+w = LoadModules()
+
+
+from xml.dom.minidom import parse, parseString
+from xml.parsers.expat import ExpatError
+
+class ParseAndExec(object):
+    '''
+    It parses the XML send from clients , parses it and then executes whats possible it accordingly
+    '''
+
+    NONODE = 600
+    QUERY_TYPE_NOT_SPECIFIED = 601
+    NODE_TYPE_UNKNOWN = 602
+
+    def __init__(self, xml, websocketHandler):
+        self.xml = xml.encode('utf-8')
+        self.websocketHandler = websocketHandler
+
+    def handleError(self, errorCode):
+        self.websocketHandler.write_message( u'<?xml version="1.0" ?> <error code="' + str(errorCode) + '">' )
+
+    def go(self):
+        dom = ''
+        try:
+            dom = parseString(self.xml)
+        except ExpatError as err:
+            if err.code == 3:
+                self.handleError( self.NONODE )
+                return
+            
+        self.nodes = dom.childNodes
+        if len(self.nodes) == 0:
+            self.handleError( self.NONODE )
+            return
+
+        if len( self.nodes[0].childNodes ) == 0:
+            self.handleError( self.NONODE ) # or what?
+            return
+
+        nodeName = self.nodes[0].nodeName 
+
+        if nodeName == u"query":
+            nodeAttribute = ""
+            try:
+                nodeAttribute = self.nodes[0].attributes["type"].value
+            except:
+                self.handleError( self.QUERY_TYPE_NOT_SPECIFIED )
+                return
+                
+            if nodeAttribute == u"suggest":
+                data = self.nodes[0].childNodes[0].data
+                
+                for i in range(len(w.suggestModules)):
+                    #this call should be made non blocking
+                    s = DriveSuggest(w, data, returntype = 'xml', module = w.suggestModules[i])
+                    result = s.result()
+                    if not result is None:
+                        #this should be flushed out 
+                        self.websocketHandler.write_message( result )
+                        
+
+
+            else:
+                self.handleError( self.NODE_TYPE_UNKNOWN )
+                return
+
+
+class WebSocketManager(tornado.websocket.WebSocketHandler):
+    def open(self):
+        #print "WebSocket opened"
+        self.write_message( u'<?xml version="1.0" ?> <notice message="waiting for input">' )
+
+    @tornado.web.asynchronous
+    def on_message(self, message):
+        d = ParseAndExec(message, self)
+        d.go()
+        #self.finish()
+        
+    def on_close(self):
+        #print "WebSocket closed"
+        pass
+
+class SuggestSocket(tornado.web.RequestHandler):
+    def get(self):
+        self.redirect("/static/Suggest.htm")
+
+settings = {
+    "static_path": os.path.join(os.path.dirname(__file__), "web"),
+}
+
 application = tornado.web.Application([
     (r"/", MainHandler),
-])
+    (r"/Socket", WebSocketManager),
+    (r"/SuggestSocket", SuggestSocket)
+], **settings)
+
+from tornado.options import define, options
 
 if __name__ == "__main__":
+    tornado.options.log_file_prefix = "NOPSA" #loggin issues not resolved yet
+    tornado.options.parse_command_line()
     application.listen(8000)
     tornado.ioloop.IOLoop.instance().start()
+
