@@ -14,10 +14,10 @@ class Search(SearchBase):
     '''
     MAX = 80
     def __init__(self, query, images = MAX):
-        #http://nopsa.hiit.fi/index.php/api/search?apikey=37461832B01D9696&tags=%2Blahore&order_attr=rank&mode=any&per_page=&page=1&encoding=html&output_type=xml&yt1=Query
+        #http://nopsa.hiit.fi/pmg/index.php/api/search?apikey=37461832B01D9696&tags=%2Blahore&order_attr=rank&mode=any&per_page=&page=1&encoding=html&output_type=xml&yt1=Query
         self.args = {
             u"apikey" : u"37461832B01D9696",
-            u"tags" : u"+"+query.encode('utf-8') , #why do we put '+' ?
+            u"tags" : "+"+query.encode('utf-8') , #why do we put '+' ?
             u"order_attr" : u"rank" ,
             u"mode" : u"any" ,
             u"per_page" : str(images).encode('utf-8') ,
@@ -30,17 +30,19 @@ class Search(SearchBase):
        
 
     def search(self):
-        url = "http://nopsa.hiit.fi/index.php/api/search?" + urllib.urlencode(self.args)
+        url = u"http://nopsa.hiit.fi/pmg/index.php/api/search?" + urllib.urlencode(self.args)
         search_results = urllib.urlopen(url)
-        dom = minidom.parseString(search_results.read())
+        search_results = search_results.read()
+        print search_results
+        dom = minidom.parseString(search_results)
         toreturn = list()
         for i in dom.getElementsByTagName("file"):
             #toreturn.append( [
-            #            i.getElementsByTagName("baseName")[0].childNodes[0].data.replace("photo", "http://nopsa.hiit.fi/images/square") , #adding in this manner is a bad habbit but can't help.. no API for this avaliable.
+            #            i.getElementsByTagName("baseName")[0].childNodes[0].data.replace("photo", "http://nopsa.hiit.fi/pmg/images/square") , #adding in this manner is a bad habbit but can't help.. no API for this avaliable.
             #            i.getElementsByTagName("originalSource")[0].childNodes[0].data
             #                ])
             my_result = copy.copy(self.result)
-            my_result["url"] = i.getElementsByTagName("baseName")[0].childNodes[0].data.replace("photo", "http://nopsa.hiit.fi/images/square") , #adding in this manner is a bad habbit but can't help.. no API for this avaliable.
+            my_result["url"] = i.getElementsByTagName("baseName")[0].childNodes[0].data.replace("photo", "http://nopsa.hiit.fi/pmg/images/square")  #adding in this manner is a bad habbit but can't help.. no API for this avaliable.
             my_result["contexturl"] = i.getElementsByTagName("originalSource")[0].childNodes[0].data
             my_result["rights"] = "Creative Commons"
 

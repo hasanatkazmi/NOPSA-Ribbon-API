@@ -32,9 +32,9 @@ class Search(SearchBase):
             url = u"http://ajax.googleapis.com/ajax/services/search/images?v=1.0&" + urllib.urlencode(self.args)
             pageresult = self.nextpage(url)
             if pageresult == []: break
-            results.append(pageresult)
+            results = results + pageresult
         
-        self.results = results        
+        self.results = results
 
 
     def nextpage(self, url):
@@ -56,7 +56,7 @@ class Search(SearchBase):
             my_result["height"] = image["height"]
             my_result["width"] = image["width"]
             my_result["contexturl"] = image["originalContextUrl"]
-            my_result["rights"] = image["Creative Commons"]
+            my_result["rights"] = "Creative Commons"
     
             toreturn.append( my_result )
         
@@ -92,8 +92,9 @@ class Suggest(SuggestBase):
 if __name__ == "__main__":
     #s = unicode(u"پاکِستان" ,'utf-8' )
     #s.decode('utf-8')
-    s = u'پاکِستان'
-    s.decode('utf-8')
-    w = Suggest( s )
+    #s = u'پاکِستان'
+    s = "Pakistan"
+    #s.decode('utf-8')
+    w = Search( s )
     print w.results
 

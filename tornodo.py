@@ -4,112 +4,8 @@ import tornado.ioloop
 import tornado.web
 import tornado.websocket
 
-class MainHandler(tornado.web.RequestHandler):
-    html = '''<html><body>
-                    <p>
-                        This is very basic service to show the current abilities of the system.<br />
-                        There is no suggest for LOC, because there is no API<br />
-                        In Image search for LOC, Image URL isn't given because there isn't API for that but it can be infered. <br/ >
-                        In Google, NOPSA and wikimedia rights are not shown because they are already known for all images <br />
-                        The search term for LOC MUST be obtained from the suggest results of LOC <br />
-                    </p>
-                    <form action="/" method="post">
-                   <input type="text" name="message">
-                   <select name="source">
-                    <option>Google</option>
-                    <option>Wikimedia</option> 
-                    <option>LOC</option>
-                    <option>NOPSA</option>
-                   </select>
-                   <select name="mode">
-                    <option>Search</option>
-                    <option>Suggest</option>
-                   </select>
-                   <input type="submit" value="Submit">
-                   </form></body></html>'''
 
-    def get(self):
-        self.write(self.html)
-
-    def post(self):
-        self.write(self.html)
-        #self.set_header("Content-Type", "text/plain")
-        #self.write("You wrote " + self.get_argument("message"))
-        self.write("Term: " + self.get_argument("message"))
-        self.write("<br />Source: " + self.get_argument("source"))
-        self.write("<br />Mode: " + self.get_argument("mode"))
-
-        if self.get_argument("mode") == "Suggest":
-            if self.get_argument("source") == "Google":
-                from modules.google import Suggest
-            elif self.get_argument("source") == "LOC":
-                self.write("<br/><br/>API limitation, cant be implemented")
-                return
-            elif self.get_argument("source") == "NOPSA":
-                from modules.nopsa import Suggest
-            elif self.get_argument("source") == "Wikimedia":
-                from modules.wikimedia import Suggest
-        
-            w = Suggest( self.get_argument("message") )
-            for i in w.results:
-                self.write("<p>" + i + "</p>")
-
-        if self.get_argument("mode") == "Search":
-            if self.get_argument("source") == "Google":
-                from modules.google import Search
-                w = Search( self.get_argument("message") )
-                #w = Search("pakistan")
-                self.write("<p>")
-                for image in w.results:
-                    self.write( "<br/>Image URL: " + image[0][0] )
-                    self.write( "<br/>Image Source: " + image[0][3] )
-                    self.write( "<br/>Image Heigth: " + image[0][1] )
-                    self.write( "<br/>Image Width: " + image[0][2] )
-                    self.write( "<br/>")
-                self.write("</p>")
-
-            elif self.get_argument("source") == "LOC":
-                from modules.loc import Search
-                w = Search( self.get_argument("message") )
-                #w = Search("pakistan")
-                self.write("<p>")
-                for image in w.results:
-                    self.write( "<br/>Image URL: (no API avaliable) " + image[2] )
-                    self.write( "<br/>Image Source: " + image[0] )
-                    self.write( "<br/>Image Rights: " + image[1] )
-                    self.write( "<br/>")
-                self.write("</p>")
-
-            elif self.get_argument("source") == "NOPSA":
-                from modules.nopsa import Search
-                w = Search( self.get_argument("message") )
-                #w = Search("pakistan")
-                self.write("<p>")
-                for image in w.results:
-                    self.write( "<br/>Image URL: " + image[0] )
-                    self.write( "<br/>Image Source: " + image[1] )
-                    self.write( "<br/>")
-                self.write("</p>")
-
-            elif self.get_argument("source") == "Wikimedia":
-                from modules.wikimedia import Search
-                w = Search( self.get_argument("message") )
-                #w = Search("pakistan")
-                self.write("If you are searching a term, it should be obtained from suggest (of wikimedia)<p>")
-                for image in w.results:
-                    self.write( "<br/>Image URL: " + image )
-                    self.write( "<br/>Image Source: " + "http://commons.wikimedia.org/wiki/"+ self.get_argument("message").strip().replace(" ", "_") )
-                    self.write( "<br/>")
-                self.write("</p>")
-        
-            #w = Suggest( self.get_argument("message") )
-            #for i in w.results:
-            #    self.write("<p>" + i + "</p>")
-
-##################################
-##################################
-
-from module_manager import DriveSuggest, LoadModules
+from module_manager import DriveSuggest, DriveSearch, LoadModules, DriveTags, DriveRelevance
 from xml.dom.minidom import Document
 import os
 
@@ -123,7 +19,9 @@ ioloop_instance = tornado.ioloop.IOLoop.instance()
 from xml.dom.minidom import parse, parseString
 from xml.parsers.expat import ExpatError
 from time import sleep
-import thread
+#import thread
+from threading import Thread
+
 
 class ParseAndExec(object):
     '''
@@ -131,8 +29,10 @@ class ParseAndExec(object):
     '''
 
     NONODE = 600
-    QUERY_TYPE_NOT_SPECIFIED = 601
+    NODE_COMPLUSORY_ATTRIB_NOT_SPECIFIED = 601
     NODE_TYPE_UNKNOWN = 602
+    PROPERTY_VALUE_UNKNOWN = 603
+    NODE_UNKNOWN = 604
 
     def __init__(self, xml, websocketHandler):
         self.xml = xml.encode('utf-8')
@@ -145,17 +45,17 @@ class ParseAndExec(object):
         '''
         This is time cosuming funtion, it takes modules times each http call to return data (calls go_module [which takes time to run] modules times)
         '''
-
-        def go_module(data, module):
+ 
+        def go_module(data, module, driveFunction):
             '''
             'go' for each module | time taking funtion. runs in seperate thread
             '''
-            s = DriveSuggest(w, data, returntype = 'xml', module = module)
+
+            s = driveFunction(w, data, returntype = 'xml', module = module)
             result = s.result()
             if not result is None:
                #data flushes out immedietly
                self.websocketHandler.write_message( result )
-
 
         dom = ''
         try:
@@ -181,7 +81,7 @@ class ParseAndExec(object):
             try:
                 nodeAttribute = self.nodes[0].attributes["type"].value
             except:
-                self.handleError( self.QUERY_TYPE_NOT_SPECIFIED )
+                self.handleError( self.NODE_COMPLUSORY_ATTRIB_NOT_SPECIFIED )
                 return
                 
             if nodeAttribute == u"suggest":
@@ -189,17 +89,82 @@ class ParseAndExec(object):
                 
                 for i in range(len(w.suggestModules)):
                     #this is non blocking as it makes each module run in seperate thread
-                    thread.start_new_thread(go_module, ((data, w.suggestModules[i])))
+                    t = Thread(target=go_module, args=(data, w.suggestModules[i], DriveSuggest))
+                    t.start()
+
+            elif nodeAttribute == u"search":
+                data = self.nodes[0].childNodes[0].data
+                
+                for i in range(len(w.searchModules)):
+                    #this is non blocking as it makes each module run in seperate thread
+                    t = Thread(target=go_module, args=(data, w.searchModules[i], DriveSearch))
+                    t.start()
 
             else:
                 self.handleError( self.NODE_TYPE_UNKNOWN )
                 return
+            
+        elif nodeName == u"tagService":
+            nodeAttribute_type = ""
+            nodeAttribute_imageid = ""
+            try:
+                nodeAttribute_type = self.nodes[0].attributes["type"].value
+                nodeAttribute_imageid = self.nodes[0].attributes["imageid"].value
+                try:
+                    nodeAttribute_imageid = int(nodeAttribute_imageid)
+                except:
+                    self.handleError( self.TYPE_MISMATCH )
+            except:
+                self.handleError( self.NODE_COMPLUSORY_ATTRIB_NOT_SPECIFIED )
+                return
+                
+            if nodeAttribute_type == u"add":
+                tag = self.nodes[0].childNodes[0].data
+                driver = DriveTags( tag, 'xml' )
+                result = driver.create(nodeAttribute_imageid)
+                self.websocketHandler.write_message( result )
+                
+        elif nodeName == u"relevanceService":
+            nodeAttribute_type = ""
+            nodeAttribute_imageid = ""
+            try:
+                nodeAttribute_type = self.nodes[0].attributes["type"].value
+                nodeAttribute_imageid = self.nodes[0].attributes["imageid"].value
+                try:
+                    nodeAttribute_imageid = int(nodeAttribute_imageid)
+                except:
+                    self.handleError( self.TYPE_MISMATCH )
+            except:
+                self.handleError( self.NODE_COMPLUSORY_ATTRIB_NOT_SPECIFIED )
+                return
+                
+            tag = self.nodes[0].childNodes[0].data #tag means tag id here
+            print "I M MADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd", ">"+tag+"<"
+            try:
+                tag = int(tag)
+            except:
+                pass
+                #because use can also send in tag as unicode
+
+            if nodeAttribute_type == "increase":
+                driver = DriveRelevance( tag, nodeAttribute_imageid, 'xml' )
+                result = driver.increase()
+            elif  nodeAttribute_type == "decrease":
+                driver = DriveRelevance( tag, nodeAttribute_imageid, 'xml' )
+                result = driver.decrease()
+            else:
+                self.handleError( self.PROPERTY_VALUE_UNKNOWN )
+                return
+            self.websocketHandler.write_message( result )
+
+        else:
+            self.handleError( self.NODE_UNKNOWN )
 
 
 class WebSocketManager(tornado.websocket.WebSocketHandler):
     def open(self):
         #print "WebSocket opened"
-        self.write_message( u'<?xml version="1.0" ?> <notice message="waiting for input">' )
+        self.write_message( u'<?xml version="1.0" ?> <notice message="waiting for input" / >' )
 
     @tornado.web.asynchronous
     def on_message(self, message):
@@ -211,18 +176,16 @@ class WebSocketManager(tornado.websocket.WebSocketHandler):
         #print "WebSocket closed"
         pass
 
-class SuggestSocket(tornado.web.RequestHandler):
-    def get(self):
-        self.redirect("/static/Suggest.htm")
 
 settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "web"),
 }
 
 application = tornado.web.Application([
-    (r"/", MainHandler),
+    #(r"/", MainHandler),
     (r"/Socket", WebSocketManager),
-    (r"/SuggestSocket", SuggestSocket)
+    #(r"/SuggestSocket", SuggestSocket),
+    (r"/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(os.path.dirname(__file__), "web")}),
 ], **settings)
 
 from tornado.options import define, options

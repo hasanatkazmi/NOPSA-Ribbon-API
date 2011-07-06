@@ -3,13 +3,13 @@
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=620">
-<title>NOPSA Ribbon API Demo</title>
-<link rel="stylesheet" href="./files/main.css" type="text/css">
-<script src="./files/h5utils.js"></script></head>
+<title>NOPSA addin for Office Suites</title>
+<link rel="stylesheet" href="files/main.css" type="text/css">
+<script src="files/h5utils.js"></script></head>
 <body>
 <section id="wrapper">
     <header>
-      <h1>NOPSA Ribbon API Demo</h1>
+      <h1>NOPSA addin for Office Suites</h1>
     </header>
 <style>
 #chat { width: 97%; }
@@ -30,139 +30,37 @@
   padding: 10px 0;
 }
 </style>
+
+<center>
+<label style="float:left;width: 100%; padding: 5px 0px 5px 0px; background: #0C0; color:white;"><a  href="index.htm">About</a>  |  <a href="screenshots.htm">Screenshots</a>  |  <a href="api.htm">API Documentation</a> | <a href="demo.htm">API Demo</a> | <a href="download.htm">Download</a></label>  
+</center>
+
 <article>
-  
-  <form>
-    <input type="hidden" id="chat" placeholder="type and press enter to chat">
-  </form>
-  
-  <p id="status" class="success"></p>
-  <!--<p>Users connected: <span id="connected"></span></p>-->
-  
-  <p>
 
-<script language="JavaScript">
-function loadxml(form) { 
-  var index=form.select.selectedIndex
-  if (form.select.options[index].value != "0") {
-    var loc = form.select.options[index].value;
-    if (loc == "1"){
-        document.getElementById("exps").value = '<?xml version="1.0" ?><query type="suggest">dogs</query>';
-    }
-    else if (loc == "2"){
-        document.getElementById("exps").value = '<?xml version="1.0" ?><query type="suggest">الله</query>';
-    }
-  }
-}
+  <p style="padding-top:60px;">
 
-</script>
-<FORM NAME="form1">
-  <SELECT NAME="select" ONCHANGE="loadxml(this.form)">
-    <OPTION VALUE="">-------Choose an XML to test-------
-    <OPTION VALUE="1">Basic Suggest
-    <OPTION VALUE="2">Unicode Suggest
-  </SELECT>
-</FORM>
-
-<textarea id="exps" style="height:100px; width:92%;">
-
-Select an XML request from above.
-
-</textarea>
-<label style="float:right;background: #0C0; padding: 5px 5px 5px 5px; color:white;" onclick="javascript:formsubmit();">Submit</label>
+      This is homepage for NOPSA's addin for Microsoft Office (PowerPoint and Word). A <a style="color:black;" href="screenshots.htm">screenshot</a> says it all.
 
   </p>
   <p style="font-size:14px;">
-    Socket will be closed from the server if you send invalid XML. <br />
-    If XML is 'unknown' (un-interpretable) by the server, it will return an error. Error codes are <a>here</a>.<br />
-    This demo page is a modification of web sockets demo page at <a>http://github.com/remy/html5demos</a>
-  </p>
-  <ul id="log"></ul>
-</article>
-<script>
-
-function formsubmit(){
-    event.preventDefault();
-    // if we're connected
-    if (conn.readyState === 1) {
-      conn.send( document.getElementById('exps').value );
-      log.innerHTML = '<li class="you">' + document.getElementById('exps').value.replace(/[<>&]/g, function (m) { return entities[m]; }).replace(/>/g,"&gt;").replace(/</g,"&lt;") + '</li>' + log.innerHTML;
-      
-    }
  
-}
+       <span style="display:block;margin-bottom:10px;">
+            What is NOPSA?<br />
+            NOPSA is ........................
+        </span>
+        <span style="display:block;margin-bottom:10px;">
+            Why an addin for Office Suite?<br />
+            because ........................
+        </span>
+        <span style="display:block;margin-bottom:10px;">
+            Whats the story behind it?<br />
+            ...............................
+        </span>
 
-function openConnection() {
-  // uses global 'conn' object
-  if (conn.readyState === undefined || conn.readyState > 1) {
-    conn = new WebSocket('ws://localhost:8000/Socket');    
-    conn.onopen = function () {
-      state.className = 'success';
-      state.innerHTML = 'Socket open';
-    };
-
-    conn.onmessage = function (event) {
-      log.innerHTML = '<li class="them">' + event.data.replace(/>/g,"&gt;").replace(/</g,"&lt;") + '</li>' + log.innerHTML;
-      /*
-      var message = JSON.parse(event.data);
-      if (typeof message == 'string') {
-        log.innerHTML = '<li class="them">' + message.replace(/[<>&]/g, function (m) { return entities[m]; }) + '</li>' + log.innerHTML;
-      } else {
-        connected.innerHTML = message;
-      }
-      */
-    };
     
-    conn.onclose = function (event) {
-      state.className = 'fail';
-      state.innerHTML = 'Socket closed';
-    };
-  }
-}
+  </p>
 
-var connected = document.getElementById('connected'),
-    log = document.getElementById('log'),
-    chat = document.getElementById('chat'),
-    form = chat.form,
-    conn = {},
-    state = document.getElementById('status'),
-    entities = {
-      '<' : '&lt;',
-      '>' : '&gt;',
-      '&' : '&amp;'
-    };
-
-
-if (window.WebSocket === undefined) {
-  state.innerHTML = 'WebSockets not supported, Please use Chrome (4.0.249.0+), IE 10+ or Safari (iOS).In FF4+ and Opera 11+, its disabled (google to enable).';
-  state.className = 'fail';
-} else {
-  state.onclick = function () {
-    if (conn.readyState !== 1) {
-      conn.close();
-      setTimeout(function () {
-        openConnection();
-      }, 250);
-    }
-  };
-   
-/*
-  addEvent(form, 'submit', function (event) {
-    event.preventDefault();
-
-    // if we're connected
-    if (conn.readyState === 1) {
-      conn.send(JSON.stringify(chat.value));
-      log.innerHTML = '<li class="you">' + chat.value.replace(/[<>&]/g, function (m) { return entities[m]; }) + '</li>' + log.innerHTML;
-      
-      chat.value = '';
-    }
-  });
-*/
-  openConnection();  
-}
-
-</script>
+</article>
 
 <p style="display:block;text-align:center;padding: 10px;margin: 10px 20px;	font-size: 0.8em;	text-align: center;	border-top: 1px solid #C9E0ED;color:grey;">
 Copyright © 2011 by Helsinki Institute for Information Technology HIIT.<br />
@@ -170,7 +68,7 @@ All Rights Reserved.
 </p>
 
 </section>
-<a href="http://github.com/hasanatkazmi/NOPSA-Ribbon-API/"><img style="position: absolute; top: 0; left: 0; border: 0;" src="./files/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
-<script src="./files/prettify.packed.js"></script>
+<a href="http://github.com/hasanatkazmi/NOPSA-Ribbon-API/"><img style="position: absolute; top: 0; left: 0; border: 0;" src="files/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+<script src="/files/prettify.packed.js"></script>
 
 </body></html>

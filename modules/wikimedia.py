@@ -47,7 +47,7 @@ class Search(SearchBase):
             "generator" : "images" ,
             "prop" : "imageinfo" ,
             "iiprop" : "url" ,
-            "titles" : query ,
+            "titles" : query.encode("utf-8") ,
             "format" : "json" ,
         }
         self.query = query

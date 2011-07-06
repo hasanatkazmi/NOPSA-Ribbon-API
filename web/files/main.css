@@ -11,15 +11,18 @@ section, header, footer {
   display: block;
 }
 
+a:link {color:white;}
+a:visited {color: white;}
+
 #wrapper {
-  width: 600px;
+  width: 800px;
   margin: 0 auto;
-  background: #fff url(/images/shade.jpg) repeat-x center bottom;
+  background: #fff url(images/shade.jpg) repeat-x center bottom;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
   border-top: 1px solid #fff;
-  padding-bottom: 76px;
+  padding-bottom: 10px;
 }
 
 h1 {
@@ -63,6 +66,8 @@ footer > * {
 #status.online {
   background: #0c0;
 }
+
+
 
 /*footer #built:hover:after {
   content: '...quickly';

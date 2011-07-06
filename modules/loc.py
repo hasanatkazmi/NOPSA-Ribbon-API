@@ -28,7 +28,7 @@ class Search(SearchBase):
             u"version" : u"1.1" ,
             u"recordSchema" : u"dc" ,
             u"startRecord" : u"1" ,
-            u"maximumRecords" : images.encode('utf-8') ,
+            u"maximumRecords" : str(images).encode('utf-8') ,
         }
         self.query = query
         self.results = self.search()
@@ -71,6 +71,10 @@ class Search(SearchBase):
                 toadd["creator"] = i.getElementsByTagName("creator")[0].childNodes[0].data 
             #except: toadd.append( "" )
             except: pass
+
+            
+            #this MUST be fixed after getting the real url by the help of LOC staff
+            toadd["url"] = toadd["contexturl"]
 
             toreturn.append( toadd )
 
