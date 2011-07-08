@@ -191,6 +191,6 @@ from tornado.options import define, options
 if __name__ == "__main__":
     tornado.options.log_file_prefix = "NOPSA" #loggin issues not resolved yet
     tornado.options.parse_command_line()
-    application.listen(80)
+    application.listen(8000)
     ioloop_instance.start()
 
