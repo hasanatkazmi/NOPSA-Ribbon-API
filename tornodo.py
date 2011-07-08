@@ -139,7 +139,6 @@ class ParseAndExec(object):
                 return
                 
             tag = self.nodes[0].childNodes[0].data #tag means tag id here
-            print "I M MADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd", ">"+tag+"<"
             try:
                 tag = int(tag)
             except:
@@ -182,9 +181,8 @@ settings = {
 }
 
 application = tornado.web.Application([
-    #(r"/", MainHandler),
+    (r"/", tornado.web.RedirectHandler, {"url": os.path.join(os.path.dirname(__file__), "index.htm")}),
     (r"/Socket", WebSocketManager),
-    #(r"/SuggestSocket", SuggestSocket),
     (r"/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(os.path.dirname(__file__), "web")}),
 ], **settings)
 
@@ -193,6 +191,6 @@ from tornado.options import define, options
 if __name__ == "__main__":
     tornado.options.log_file_prefix = "NOPSA" #loggin issues not resolved yet
     tornado.options.parse_command_line()
-    application.listen(8000)
+    application.listen(80)
     ioloop_instance.start()
 

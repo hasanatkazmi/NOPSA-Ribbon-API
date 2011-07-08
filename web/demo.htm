@@ -105,6 +105,7 @@ Select an XML request from above.
   <p style="font-size:14px;">
     Socket will be closed from the server if you send invalid XML. <br />
     If XML is 'unknown' (un-interpretable) by the server, it will return an error. Error codes are <a style="color:black;" href="api.htm">here</a>.<br />
+    Socket will only be closed by server if you enter malfuntioned xml. Please reload page to reconnect to the server and write corrent XML <br />
     This demo page is a modification of web sockets demo page at <a style="color:black;">http://github.com/remy/html5demos</a>
   </p>
   <ul id="log"></ul>
@@ -127,7 +128,10 @@ function openConnection() {
   if (conn.readyState === undefined || conn.readyState > 1) {
 ///////////////////////////////////////////////////////////////////////
 ///////////////////CHANGE THIS CONNECTION BELOW////////////////////////
-    conn = new WebSocket('ws://localhost:8000/Socket');    
+
+//    conn = new WebSocket('ws://119.154.52.213:80/Socket');
+    conn = new WebSocket('ws://nopsa.hiit.fi:8000/Socket');        
+
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 

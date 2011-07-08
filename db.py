@@ -46,7 +46,8 @@ from sqlalchemy.engine import create_engine
 ###################### EDIT DATABASE CONNECTION STRING #########################
 ################################################################################
 
-engine = create_engine('mysql+mysqldb://root:513@localhost/ribbon', echo=True)
+#engine = create_engine('mysql+mysqldb://root:513@localhost/ribbon', echo=True)
+engine = create_engine('mysql+mysqldb://hasanat:bvSLZTGXM7PWxQ8a@localhost/Ribbon', echo=True)
 
 ################################################################################
 ################################################################################
