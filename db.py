@@ -49,6 +49,15 @@ api_table = schema.Table('api_keys', metadata,
     schema.Column('id', types.Integer, primary_key=True, autoincrement=True),
     schema.Column('api_key', types.Unicode(255), default = random_string() , primary_key=True),
     schema.Column('comment', types.Unicode(255)),
+    schema.Column('created_at', types.DateTime(), default=now()),
+)
+
+#this table will grow insanely as this is dump of all relevance changes. This MUST never be called for user. Only admin should call it so that queries can be limited
+relevence_history_table = schema.Table('relevence_history', metadata,
+    schema.Column('tagid', types.Integer, nullable=False),
+    schema.Column('imageid', types.Integer, nullable=False),
+    schema.Column('relevancychange', types.Integer, nullable=False),
+    schema.Column('created_at', types.DateTime(), default=now()),
 )
 
 

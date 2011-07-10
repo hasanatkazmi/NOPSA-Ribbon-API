@@ -228,6 +228,7 @@ settings = {
 
 
 from apitornado import Newkey, Allkeys, Deletekeys
+from relevancetornado import RelevanceTrend
 
 application = tornado.web.Application([
     (r"/", tornado.web.RedirectHandler, {"url": os.path.join(os.path.dirname(__file__), "index.htm")}),
@@ -236,6 +237,8 @@ application = tornado.web.Application([
     (r"/newkey", Newkey),
     (r"/allkeys", Allkeys),
     (r"/delkey", Deletekeys),
+
+    (r"/RelevanceTrend", RelevanceTrend),
 
     (r"/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(os.path.dirname(__file__), "web")}),
 ], **settings)
@@ -248,7 +251,4 @@ if __name__ == "__main__":
     application.listen(80)
     ioloop_instance.start() 
 
-    from tornado import autoreload
-    autoreload.start(ioloop_instance)
-    
 

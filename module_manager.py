@@ -167,16 +167,22 @@ class ManageDB(object):
         '''
         (though not natural (as in human sense) but change_relevancy can be treated as wrapper of this function; you can even insert using change_relevancy function)
         '''
+
+        def register_relevance_change(tag, image, relevance):   #tag and image should be their respective ids, relevance should be signed int        
+            try:
+                result = relevence_history_table.insert().execute( 
+                    tagid = tag,
+                    imageid = image,
+                    relevancychange = int(relevancy),
+                )
+                return ManageDB.SUCCESS
+            except:
+                return ManageDB.FAILURE
+
+
         #tag if int is taken as id in tags table, if string, then its taken as actual tag
         #if tag is neither int or str / unicode it will fire an error.. make sure its either of the two
         if isinstance(tag, str) or isinstance(tag, unicode):
-            #s = select([tags_table], tags_table.c.tag == tag)
-            #result = engine.execute(s).fetchone()
-            #if result is None:  #this tag is not in tags table itself, first add it to database
-            #    #adding tag to tags table
-            #    ManageDB.add_tag(tag)
-            #    result = engine.execute(s).fetchone() #now this will return an entry
-
             #tag = result.id #modifing tag which is string to id (which corresponds to tag's id)
             status, tag = ManageDB.add_tag_to_db( tag )
 
@@ -215,12 +221,14 @@ class ManageDB(object):
                             where( and_(relation_table.c.tagid == tag, relation_table.c.imageid == image) ).
                             values(relevancy=relation_table.c.relevancy+1)
                     )
+                    register_relevance_change(tag, image, 1)
                 elif relevancy == ManageDB.DECREMENET:
                     result = engine.execute( 
                         relation_table.update().
                             where( and_(relation_table.c.tagid == tag, relation_table.c.imageid == image) ).
                             values(relevancy=relation_table.c.relevancy-1)
                     )
+                    register_relevance_change(tag, image, -1)
                 else:
                     try:
                         #this is data evaluation
@@ -237,6 +245,7 @@ class ManageDB(object):
                                 where( and_(relation_table.c.tagid == tag, relation_table.c.imageid == image) ).
                                 values(relevancy = relevancy )
                         )
+                        register_relevance_change(tag, image, relevancy)
                         return ManageDB.SUCCESS
 
                     result = engine.execute( 
@@ -244,7 +253,7 @@ class ManageDB(object):
                             where( and_(relation_table.c.tagid == tag, relation_table.c.imageid == image) ).
                             values(relevancy=relation_table.c.relevancy +  int(relevancy) )
                     )        
-
+                    register_relevance_change(tag, image, int(relevancy))
 
                 return ManageDB.SUCCESS
 
@@ -257,6 +266,7 @@ class ManageDB(object):
                     imageid = image,
                     relevancy = relevancy,
                 )
+                register_relevance_change(tag, image, relevancy)
                 return ManageDB.SUCCESS
             except:
                 return ManageDB.FAILURE
@@ -280,11 +290,10 @@ class ManageDB(object):
                     imageid = image,
                     relevancy = int(relevancy),
                 )
+                register_relevance_change(tag, image, int(relevancy))
                 return ManageDB.SUCCESS
             except:
                 return ManageDB.FAILURE
-
-
             
     
     @staticmethod
@@ -294,6 +303,20 @@ class ManageDB(object):
         '''
         return ManageDB.attatch_tag_to_image(tag, image, relevancy = new_relevancy, update = True)
         
+
+    @staticmethod
+    def relevancy_history(tag, image):  #tag and image should be ids of respective
+        s = select( [relevence_history_table], and_( relevence_history_table.c.tagid == tag, relevence_history_table.c.imageid == image )  )
+        result = engine.execute(s).fetchall()
+        relevance_change = []
+        when = []
+        
+        for entry in result:
+            relevance_change.append( entry.relevancychange )
+            when.append( entry.created_at )
+
+        return {"changes": relevance_change, "datetime": when}
+
 
     @staticmethod
     def register_image_search(images, modulename, query):  #this is list of images (image is the dictionary format )
@@ -643,6 +666,10 @@ class DriveRelevance(object):
 
         return result
 
+    def giveHistory(self):  
+        #CAUTION tag and image must be int ..
+        return ManageDB.relevancy_history(self.tag, self.image)
+
     def result_xml(self, result):
         doc = Document()
         code_tag = doc.createElement("code")
@@ -690,7 +717,8 @@ if __name__ == "__main__":
     #print "OEEEEEEEEEEEEEEEe", ManageDB.api_key_add("heyyy")
     #print ManageDB.api_is_key('67158ZE0dIIWB')
     #ManageDB.api_key_delete('L58L7CLX1PIB')
-    print ManageDB.api_all()
+    #print ManageDB.api_all()
+    print ManageDB.relevancy_history("1994928747", "551117815")
 
 
 
