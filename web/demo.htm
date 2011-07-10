@@ -53,28 +53,31 @@ function loadxml(form) {
   if (form.select.options[index].value != "0") {
     var loc = form.select.options[index].value;
     if (loc == "1"){
-        document.getElementById("exps").value = '<?xml version="1.0" ?><query type="suggest">dogs</query>';
+        document.getElementById("exps").value = '<?xml version="1.0" ?><query api="QKGQ7X3WB4WL" type="suggest">dogs</query>';
     }
     else if (loc == "2"){
-        document.getElementById("exps").value = '<?xml version="1.0" ?><query type="suggest">الله</query>';
+        document.getElementById("exps").value = '<?xml version="1.0" ?><query api="QKGQ7X3WB4WL" type="suggest">الله</query>';
     }
     else if (loc == "3"){
-        document.getElementById("exps").value = '<?xml version="1.0" ?><query type="search">dogs</query>';
+        document.getElementById("exps").value = '<?xml version="1.0" ?><query api="QKGQ7X3WB4WL" type="search">dogs</query>';
     }
     else if (loc == "4"){
-        document.getElementById("exps").value = '<?xml version="1.0" ?><query type="search">الله</query>';
+        document.getElementById("exps").value = '<?xml version="1.0" ?><query api="QKGQ7X3WB4WL" type="search">الله</query>';
     }
     else if (loc == "5"){
-        document.getElementById("exps").value = '<?xml version="1.0" ?><tagService type="add" imageid="1994928747">kashmir</tagService>';
+        document.getElementById("exps").value = '<?xml version="1.0" ?><tagService api="QKGQ7X3WB4WL" type="add" imageid="1994928747">kashmir</tagService>';
     }
     else if (loc == "6"){
-        document.getElementById("exps").value = '<?xml version="1.0" ?><tagService type="add" imageid="1994928747">الله</tagService>';
+        document.getElementById("exps").value = '<?xml version="1.0" ?><tagService api="QKGQ7X3WB4WL" type="add" imageid="1994928747">الله</tagService>';
     }
     else if (loc == "7"){
-        document.getElementById("exps").value = '<?xml version="1.0" ?><relevanceService type="increase" imageid="551117815">1994928747</relevanceService>';
+        document.getElementById("exps").value = '<?xml version="1.0" ?><relevanceService api="QKGQ7X3WB4WL" type="increase" imageid="551117815">1994928747</relevanceService>';
     }
     else if (loc == "8"){
-        document.getElementById("exps").value = '<?xml version="1.0" ?><relevanceService type="decrease" imageid="551117815">1994928747</relevanceService>';
+        document.getElementById("exps").value = '<?xml version="1.0" ?><relevanceService api="QKGQ7X3WB4WL" type="decrease" imageid="551117815">1994928747</relevanceService>';
+    }
+    else if (loc == "9"){
+        document.getElementById("exps").value = '<?xml version="1.0" ?><relevanceService api="QKGQ7X3WB4WL" type="custom" value="+10" imageid="551117815">1994928747</relevanceService>';
     }
   }
 }
@@ -91,6 +94,7 @@ function loadxml(form) {
     <OPTION VALUE="6">Add Tag (Unicode)                     </option>
     <OPTION VALUE="7">Chance Relevance - Increase           </option>
     <OPTION VALUE="8">Chance Relevance - Decrease           </option>
+    <OPTION VALUE="9">Chance Relevance - Custom            </option>
   </SELECT>
 </FORM>
 
@@ -130,7 +134,8 @@ function openConnection() {
 ///////////////////CHANGE THIS CONNECTION BELOW////////////////////////
 
 //    conn = new WebSocket('ws://119.154.52.213:80/Socket');
-    conn = new WebSocket('ws://nopsa.hiit.fi:8000/Socket');        
+    conn = new WebSocket('ws://localhost:80/Socket');
+//    conn = new WebSocket('ws://nopsa.hiit.fi:8000/Socket');        
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////

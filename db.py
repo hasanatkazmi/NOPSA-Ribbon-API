@@ -9,6 +9,12 @@ import datetime
 def now():
     return datetime.datetime.utcnow()
 
+def random_string():
+    import string
+    import random
+    return ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(12))
+
+
 metadata = schema.MetaData()
 
 
@@ -39,6 +45,12 @@ relation_table = schema.Table('relation', metadata,
     schema.Column('relevancy', types.Integer),
 )
 
+api_table = schema.Table('api_keys', metadata,
+    schema.Column('id', types.Integer, primary_key=True, autoincrement=True),
+    schema.Column('api_key', types.Unicode(255), default = random_string() , primary_key=True),
+    schema.Column('comment', types.Unicode(255)),
+)
+
 
 from sqlalchemy.engine import create_engine
 
@@ -46,8 +58,8 @@ from sqlalchemy.engine import create_engine
 ###################### EDIT DATABASE CONNECTION STRING #########################
 ################################################################################
 
-#engine = create_engine('mysql+mysqldb://root:513@localhost/ribbon', echo=True)
-engine = create_engine('mysql+mysqldb://hasanat:bvSLZTGXM7PWxQ8a@localhost/Ribbon', echo=True)
+engine = create_engine('mysql+mysqldb://root:513@localhost/ribbon', echo=True)
+#engine = create_engine('mysql+mysqldb://hasanat:bvSLZTGXM7PWxQ8a@localhost/Ribbon', echo=True)
 
 ################################################################################
 ################################################################################

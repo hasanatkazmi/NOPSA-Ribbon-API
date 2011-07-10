@@ -1,11 +1,12 @@
 
 
+
 import tornado.ioloop
 import tornado.web
 import tornado.websocket
 
 
-from module_manager import DriveSuggest, DriveSearch, LoadModules, DriveTags, DriveRelevance
+from module_manager import DriveSuggest, DriveSearch, LoadModules, DriveTags, DriveRelevance, DriveAPIKeys
 from xml.dom.minidom import Document
 import os
 
@@ -75,6 +76,26 @@ class ParseAndExec(object):
             return
 
         nodeName = self.nodes[0].nodeName 
+
+
+        api = ""
+        try:
+            api = self.nodes[0].attributes["api"].value
+        
+            try:
+                is_api = DriveAPIKeys().is_api(api)
+                if is_api == False:
+                    self.handleError( DriveAPIKeys.WRONG_API ) 
+                    return
+                #by this line.. its proved to be right api
+            except:
+                pass
+
+        except:
+            self.handleError( self.NODE_COMPLUSORY_ATTRIB_NOT_SPECIFIED )
+            return
+
+
 
         if nodeName == u"query":
             nodeAttribute = ""
@@ -151,6 +172,31 @@ class ParseAndExec(object):
             elif  nodeAttribute_type == "decrease":
                 driver = DriveRelevance( tag, nodeAttribute_imageid, 'xml' )
                 result = driver.decrease()
+            elif  nodeAttribute_type == "custom":
+                try:                    
+                    value_to_change = self.nodes[0].attributes["value"].value
+                except:
+                    self.handleError( self.NODE_COMPLUSORY_ATTRIB_NOT_SPECIFIED )
+
+                try:
+                    #this is validation of what user enterd as value .. should  be int with sign
+                    validator = (value_to_change[0] == "-" or value_to_change[0] == "+") and int(value_to_change)
+                    if validator == False: raise
+                    #this means its for changing the value (incrementing or decrementing..not the absolute change)
+                except:
+                    try:
+                        int(value_to_change)
+                    except:
+                        self.handleError( self.PROPERTY_VALUE_UNKNOWN )
+                        return
+
+                    driver = DriveRelevance( tag, nodeAttribute_imageid, 'xml' )
+                    result = driver.set( int(value_to_change) )
+                    return
+                
+                driver = DriveRelevance( tag, nodeAttribute_imageid, 'xml' )
+                result = driver.change( int(value_to_change[1:]), value_to_change[0] )
+
             else:
                 self.handleError( self.PROPERTY_VALUE_UNKNOWN )
                 return
@@ -180,9 +226,17 @@ settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "web"),
 }
 
+
+from apitornado import Newkey, Allkeys, Deletekeys
+
 application = tornado.web.Application([
     (r"/", tornado.web.RedirectHandler, {"url": os.path.join(os.path.dirname(__file__), "index.htm")}),
     (r"/Socket", WebSocketManager),
+    # urls of these should not be changed because they have been statically refered in html pages
+    (r"/newkey", Newkey),
+    (r"/allkeys", Allkeys),
+    (r"/delkey", Deletekeys),
+
     (r"/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(os.path.dirname(__file__), "web")}),
 ], **settings)
 
@@ -191,6 +245,10 @@ from tornado.options import define, options
 if __name__ == "__main__":
     tornado.options.log_file_prefix = "NOPSA" #loggin issues not resolved yet
     tornado.options.parse_command_line()
-    application.listen(8000)
-    ioloop_instance.start()
+    application.listen(80)
+    ioloop_instance.start() 
+
+    from tornado import autoreload
+    autoreload.start(ioloop_instance)
+    
 

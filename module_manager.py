@@ -222,11 +222,29 @@ class ManageDB(object):
                             values(relevancy=relation_table.c.relevancy-1)
                     )
                 else:
+                    try:
+                        #this is data evaluation
+                        int(relevancy)                        
+                    except:
+                        return ManageDB.TYPE_MISMATCH
+
+                    try:
+                        if not isinstance(relevancy, unicode): raise
+                        if not(relevancy[0] == "-" or relevancy[0] == "+"): raise
+                    except:
+                        result = engine.execute( 
+                            relation_table.update().
+                                where( and_(relation_table.c.tagid == tag, relation_table.c.imageid == image) ).
+                                values(relevancy = relevancy )
+                        )
+                        return ManageDB.SUCCESS
+
                     result = engine.execute( 
                         relation_table.update().
                             where( and_(relation_table.c.tagid == tag, relation_table.c.imageid == image) ).
-                            values(relevancy=relevancy)
-                    )
+                            values(relevancy=relation_table.c.relevancy +  int(relevancy) )
+                    )        
+
 
                 return ManageDB.SUCCESS
 
@@ -242,6 +260,31 @@ class ManageDB(object):
                 return ManageDB.SUCCESS
             except:
                 return ManageDB.FAILURE
+
+            #or if relevancy is change by number or absolute change, in either case its one call
+            try:
+                #this is data evaluation
+                int(relevancy)
+            except:
+                return ManageDB.TYPE_MISMATCH
+
+            try:
+                if not isinstance(relevancy, unicode): raise
+                if not(relevancy[0] == "-" or relevancy[0] == "+"): raise
+            except:
+                return ManageDB.TYPE_MISMATCH
+
+            try:
+                result = relation_table.insert().execute( 
+                    tagid = tag,
+                    imageid = image,
+                    relevancy = int(relevancy),
+                )
+                return ManageDB.SUCCESS
+            except:
+                return ManageDB.FAILURE
+
+
             
     
     @staticmethod
@@ -364,7 +407,50 @@ class ManageDB(object):
         return toreturn
         
 
+    @staticmethod
+    def api_key_add(comment):
+        try:
+            i = api_table.insert()
+            i.execute(comment = comment)
+
+            s = select( [api_table.c.api_key], api_table.c.comment == comment )
+            s = s.execute()
+            s = s.fetchone()
+            return s.api_key
+        except:
+            return ManageDB.FAILURE
+
+    @staticmethod
+    def api_is_key(key):
+        try:
+            s = select( [api_table.c.api_key], api_table.c.api_key == key )
+            s = s.execute()
+            s = s.fetchone()
+            if s == None: return False
+            else: return True
+        except:
+            return ManageDB.FAILURE
     
+
+    @staticmethod
+    def api_key_delete(key):
+        try:
+            result = api_table.delete(api_table.c.api_key == key).execute()
+            ManageDB.SUCCESS
+        except:
+            ManageDB.FAILURE
+    
+
+    @staticmethod
+    def api_all():
+        try:
+            s = select( [api_table ])
+            s = s.execute()
+            s = s.fetchall()
+
+            return [ {"key":row.api_key, "comment":row.comment} for row in s ]
+        except:
+            ManageDB.FAILURE
 
 class DriveSearch(object): 
     '''
@@ -541,6 +627,21 @@ class DriveRelevance(object):
 
         return result
 
+    def change(self, value, operation): #operation can be '+' or '-' (string) 
+        result = ManageDB.change_relevancy(self.tag, self.image, operation + str(value) )
+        
+        if self.returntype == 'xml':
+            return self.result_xml( result )
+
+        return result
+
+    def set(self, value): #operation can be '+' or '-' (string) 
+        result = ManageDB.change_relevancy(self.tag, self.image, value)
+        
+        if self.returntype == 'xml':
+            return self.result_xml( result )
+
+        return result
 
     def result_xml(self, result):
         doc = Document()
@@ -550,6 +651,22 @@ class DriveRelevance(object):
         doc.appendChild(code_tag)    
 
         return doc.toprettyxml(indent = " ")
+
+class DriveAPIKeys(object):
+
+    WRONG_API = "7500"
+
+    def add(self, comment):
+        return ManageDB.api_key_add(comment)
+
+    def is_api(self, api_key):
+        return ManageDB.api_is_key(api_key)
+
+    def delete_api(self, api_key):
+        return ManageDB.api_key_delete(api_key)
+
+    def return_all_keys(self):
+        return ManageDB.api_all()
 
 
 
@@ -565,9 +682,15 @@ if __name__ == "__main__":
     #print "THIS IS THE RETURNED STUFF ", test
     #print ManageDB.add_tag_to_db("i m a tag baby")
     #print "THIS IS THE RETURNED STUFF ", test
-    print ManageDB.attatch_tag_to_image(u'i m a tag babydd',1913113442)
+    #print ManageDB.attatch_tag_to_image(u'i m a tag babydd',1913113442)
     #print ManageDB.attatch_tag_to_image('fgh',{'width': None, 'contexturl': u'http://hdl.loc.gov/loc.pnp/cph.3c29163', 'rights': u'Publication may be restricted. For information see "New York World-Telegram ...,"', 'url': u'http://hdl.loc.gov/loc.pnp/cph.3c29163', 'creator': u'', 'height': None},update=True,relevancy = 300)
     #print "THIS IS THE RETURNED STUFF ", test
     #print ManageDB.change_relevancy('kutta hai sala',{'width': '500', 'contexturl': 'http://www.flickr.com/photos/ny156uk/817118407/', 'rights': 'Creative Commons', 'url': u'http://farm2.static.flickr.com/1224/817118407_355fe32c6a.jpg', 'creator': u'', 'module': 'google', 'height': '333'}, ManageDB.INCREMENT)
     #print ManageDB.change_relevancy('kutta hai sala',1321143460, ManageDB.INCREMENT)
+    #print "OEEEEEEEEEEEEEEEe", ManageDB.api_key_add("heyyy")
+    #print ManageDB.api_is_key('67158ZE0dIIWB')
+    #ManageDB.api_key_delete('L58L7CLX1PIB')
+    print ManageDB.api_all()
+
+
 
