@@ -3,3 +3,42 @@ This is RESTful API interface for NOPSA plugins for Word Processors etc.
 http://nopsa.hiit.fi/
 
 
+
+HOW TO INSTALL
+
+Note: These set of instructions assume that you are running Debian (Lenny). 
+It might also work for other systems as well.
+It is also assumed that you have sql server installed.
+
+
+1) changing sources.list temporarily:
+	create a backup of source.list:
+	cp /etc/apt/sources.list /etc/apt/sources.list.backup
+	rm /etc/apt/sources.list
+	echo "deb http://ftp.debian.org/debian/ squeeze main" > /etc/apt/sources.list
+
+2) update apt-get:
+	sudo apt-get update
+
+3) install tornado, sqlalchemy, simplejson:
+	sudo apt-get install python python-tornado python-sqlalchemy python-simplejson
+
+4) undo changes in source.list which we did in step 1:
+	rm /etc/apt/sources.list
+	cp /etc/apt/sources.list.backup /etc/apt/sources.list
+	rm /etc/apt/sources.list.backup
+
+5) update apt-get:
+	sudo apt-get update
+
+Please don't skip step 4 and 5 as it will update other installed binaries which may harm other servers running on machine.
+
+
+6) download the server code:
+	(cd into the directory you want server code to reside)
+	wget -O ribbon.tar.gz https://github.com/hasanatkazmi/NOPSA-Ribbon-API/tarball/master
+	tar -xvvf ribbon.tar.gz
+	cd hasanatkazmi*
+	python2.6 tornado.py
+
+
