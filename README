@@ -34,11 +34,32 @@ It is also assumed that you have sql server installed.
 Please don't skip step 4 and 5 as it will update other installed binaries which may harm other servers running on machine.
 
 
-6) download the server code:
+6) now tornado is installed but tornado version is 1.0.1 (we need atleast 1.2.1) and doesn't support all features are used in ribbon API.
+	So lets manually update tornado.
+	(we installed old tornado at first place so that all depedences can be installed):
+	wget -O tornado.tar.gz https://github.com/downloads/facebook/tornado/tornado-1.2.1.tar.gz
+	tar -xvvf tornado.tar.gz
+	cd tornado-1.2.1
+	python setup.py install
+
+7) run tornado tests to confirm install:
+	cd tornado/test
+	python runtests.py
+
+	confirm that all tests run successfully
+
+8) download the server code:
 	(cd into the directory you want server code to reside)
 	wget -O ribbon.tar.gz https://github.com/hasanatkazmi/NOPSA-Ribbon-API/tarball/master
 	tar -xvvf ribbon.tar.gz
 	cd hasanatkazmi*
 	python2.6 tornado.py
 
+
+By now server must be up and running. Visit http://localhost:8000 in a web browswer
+
+DEBUG:
+	1 ) 	Confirm database connectivity string in line # 60 of db.py
+		(https://github.com/hasanatkazmi/NOPSA-Ribbon-API/blob/ff961a0c8a7fb537c57d420beb33f94503ce72d1/db.py#L69)
+	2)	Confirm that line 137 of web/demp.htm conforms to the exact server address
 
