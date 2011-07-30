@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python2.6
+
 # -*- coding: utf-8 -*-
 
 import urllib
@@ -90,9 +91,6 @@ class Suggest(SuggestBase):
 
 
 if __name__ == "__main__":
-    #s = unicode(u"پاکِستان" ,'utf-8' )
-    #s.decode('utf-8')
-    #s = u'پاکِستان'
     s = "Pakistan"
     #s.decode('utf-8')
     w = Search( s )

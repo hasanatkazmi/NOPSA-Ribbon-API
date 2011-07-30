@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python2.6
+
 
 '''
 This file MUST be updated after writing a new module

@@ -1,3 +1,4 @@
+#!/usr/bin/python2.6
 
 import tornado.web
 from module_manager import DriveAPIKeys

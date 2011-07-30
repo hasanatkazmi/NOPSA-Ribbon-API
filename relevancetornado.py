@@ -1,3 +1,5 @@
+#!/usr/bin/python2.6
+
 import tornado
 from module_manager import DriveAPIKeys, DriveRelevance
 

@@ -21,7 +21,7 @@ It is also assumed that you have sql server installed.
 	sudo apt-get update
 
 3) install tornado, sqlalchemy, simplejson:
-	sudo apt-get install python python-tornado python-sqlalchemy python-simplejson
+	sudo apt-get install python2.6 python-tornado python-sqlalchemy python-simplejson
 
 4) undo changes in source.list which we did in step 1:
 	rm /etc/apt/sources.list
@@ -40,11 +40,11 @@ Please don't skip step 4 and 5 as it will update other installed binaries which 
 	wget -O tornado.tar.gz https://github.com/downloads/facebook/tornado/tornado-1.2.1.tar.gz
 	tar -xvvf tornado.tar.gz
 	cd tornado-1.2.1
-	python setup.py install
+	python2.6 setup.py install
 
 7) run tornado tests to confirm install:
 	cd tornado/test
-	python runtests.py
+	python2.6 runtests.py
 
 	confirm that all tests run successfully
 
@@ -59,7 +59,8 @@ Please don't skip step 4 and 5 as it will update other installed binaries which 
 By now server must be up and running. Visit http://localhost:8000 in a web browswer
 
 DEBUG:
-	1 ) 	Confirm database connectivity string in line # 60 of db.py
+    0)  Use aptitute to install if apt-get creates problems 
+	1) 	Confirm database connectivity string in line # 60 of db.py
 		(https://github.com/hasanatkazmi/NOPSA-Ribbon-API/blob/ff961a0c8a7fb537c57d420beb33f94503ce72d1/db.py#L69)
 	2)	Confirm that line 137 of web/demp.htm conforms to the exact server address
 

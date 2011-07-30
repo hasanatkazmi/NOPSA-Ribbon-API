@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python2.6
+
 
 #This class was advised to me named search manager in proposal but infact its module manager.
 
@@ -544,7 +545,7 @@ class DriveSearch(object):
             temp.appendChild( doc.createTextNode( image['image_holder'] ) )
             image_tag.appendChild( temp )
 
-            temp = doc.createElement("image")
+            temp = doc.createElement("url")
             temp.appendChild( doc.createTextNode( image['image'] ) )
             image_tag.appendChild( temp )
 
@@ -571,19 +572,24 @@ class DriveSearch(object):
             temp = doc.createElement("tags")
 
             for tag in image['tags']:
+
+                temp0 = doc.createElement("tag")
+
                 temp2 = doc.createElement("id")
                 temp2.appendChild( doc.createTextNode( str(tag['id']) ) )
-                temp.appendChild(temp2)
+                temp0.appendChild(temp2)
 
                 temp2 = doc.createElement("relevancy")
                 temp2.appendChild( doc.createTextNode( str(tag['relevancy']) ) )
-                temp.appendChild(temp2)
+                temp0.appendChild(temp2)
 
-                temp2 = doc.createElement("tag")
+                temp2 = doc.createElement("string")
                 temp2.appendChild( doc.createTextNode( tag['tag'] ) )
-                temp.appendChild(temp2)
+                temp0.appendChild(temp2)
 
-                image_tag.appendChild( temp )
+                temp.appendChild(temp0)
+
+            image_tag.appendChild( temp )
 
 
             search_tag.appendChild(image_tag)

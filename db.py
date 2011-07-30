@@ -1,3 +1,4 @@
+#!/usr/bin/python2.6
 
 from sqlalchemy import schema, types
 from sqlalchemy.sql import select, and_, or_, not_
@@ -5,6 +6,7 @@ from sqlalchemy.exc import * #importing all errors
 from sqlalchemy.orm import sessionmaker
 
 import datetime
+import config
 
 def now():
     return datetime.datetime.utcnow()
@@ -67,8 +69,7 @@ from sqlalchemy.engine import create_engine
 ###################### EDIT DATABASE CONNECTION STRING #########################
 ################################################################################
 
-#engine = create_engine('mysql+mysqldb://root:513@localhost/ribbon', echo=True)
-engine = create_engine('mysql+mysqldb://hasanat:bvSLZTGXM7PWxQ8a@localhost/Ribbon', echo=True)
+engine = create_engine(config.database_string, echo=True)
 
 ################################################################################
 ################################################################################

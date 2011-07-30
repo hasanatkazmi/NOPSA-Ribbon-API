@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python2.6
+
 
 import urllib
 import simplejson
