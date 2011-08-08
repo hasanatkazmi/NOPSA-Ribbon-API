@@ -334,7 +334,7 @@ class ManageDB(object):
             ManageDB.attatch_tag_to_image(query, image, relevancy=1)
     
     @staticmethod
-    def search_images(query):
+    def search_images(query, module): #module here is module's name
         '''
         query is unicode representation of search string
         '''
@@ -355,13 +355,14 @@ class ManageDB(object):
         #TODO should also try to fetch snonyms of query
 
         toreturn = []
-
-        ##this is to find EXACT match of the word
-        s = select([relation_table.c.imageid], relation_table.c.tagid == crc32(exact) )
-        result = engine.execute(s).fetchall()
+        
+        #s = select([relation_table.c.imageid], relation_table.c.tagid == crc32(exact) ) # I forgot to filter the module out
+        s = select([relation_table.c.imageid], relation_table.c.tagid == crc32(exact), from_obj=[ relation_table.join( image_table, image_table.c.source == module )  ]  )
+        #print s.__str__()
+        result = engine.execute(s).fetchmany(150)
         myor = "or_(" + "".join(["image_table.c.id == " + str(image.imageid) + ", " for image in result]) + ")"
         myor = eval(myor)
-        s = select([image_table], myor )
+        s = select([image_table], myor)
         #never fetch more than 150 exact images
         result = engine.execute(s).fetchmany(150)
 
@@ -386,22 +387,25 @@ class ManageDB(object):
                 image_tag["id"] = tag.tagid
                 image_tag["relevancy"] = tag.relevancy
                 s = select([tags_table.c.tag], tags_table.c.id == tag.tagid )
-                result = engine.execute(s).fetchone()
-                image_tag["tag"] = result.tag
+                resultx = engine.execute(s).fetchone()
+                if resultx:
+                    image_tag["tag"] = resultx.tag
 
-                image_tags.append(image_tag)
+                    image_tags.append(image_tag)
             
             image_dict["tags"] = image_tags
             image_dict["prirority"] = "exact"
             toreturn.append(image_dict)
 
-
+        
         #this one is to find matches for parts of query string, e.g. if query is "hello world", it finds results for BOTH "hello" and "world"
         #pervious loop(the one for exact matching) and this loop has somwhat idendical code , when updating this loop, consult that one
         if total_images_in_one_partial_tag != 0:
             for possible_tag in possible_tags:
-                s = select([relation_table.c.imageid], relation_table.c.tagid == crc32(possible_tag) )
-                result = engine.execute(s).fetchall()
+                #s = select([relation_table.c.imageid], relation_table.c.tagid == crc32(possible_tag) ) 
+                s = select([relation_table.c.imageid], relation_table.c.tagid == crc32(possible_tag), from_obj=[ relation_table.join( image_table, image_table.c.source == module )  ]  )
+
+                result = engine.execute(s).fetchmany( total_images_in_one_partial_tag )
                 myor = "or_(" + "".join(["image_table.c.id == " + str(image.imageid) + ", " for image in result]) + ")"
                 myor = eval(myor)
                 s = select([image_table], myor )
@@ -512,7 +516,7 @@ class DriveSearch(object):
         ManageDB.register_image_search( images.results , module.name, self.query)
         #now retriving from database.. using search_images funtion
         #return images.results
-        results = ManageDB.search_images(self.query)
+        results = ManageDB.search_images(self.query, module.name)
         #open("out.txt", "w").write(str(results))
         #return results
         if self.returntype == 'xml':

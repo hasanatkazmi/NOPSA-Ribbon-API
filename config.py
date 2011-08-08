@@ -20,8 +20,8 @@ superpassword = "soawesomeman"
 ###################### EDIT DATABASE CONNECTION STRING #########################
 ################################################################################
 
-database_string =  'mysql+mysqldb://hasanat:bvSLZTGXM7PWxQ8a@localhost/Ribbon'
-#database_string = 'mysql+mysqldb://root:513@localhost/ribbon'
+#database_string =  'mysql+mysqldb://hasanat:bvSLZTGXM7PWxQ8a@localhost/Ribbon'
+database_string = 'mysql+mysqldb://root:513@localhost/ribbon'
 
 ################################################################################
 ################################################################################

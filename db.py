@@ -65,15 +65,9 @@ relevence_history_table = schema.Table('relevence_history', metadata,
 
 from sqlalchemy.engine import create_engine
 
-################################################################################
-###################### EDIT DATABASE CONNECTION STRING #########################
-################################################################################
-
-engine = create_engine(config.database_string, echo=True)
-
-################################################################################
-################################################################################
-################################################################################
+#this config.string comes from config.py
+#engine = create_engine(config.database_string, echo=True)
+engine = create_engine(config.database_string)
 
 metadata.bind = engine
 metadata.create_all(checkfirst=True)
