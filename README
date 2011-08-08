@@ -60,7 +60,6 @@ By now server must be up and running. Visit http://localhost:8000 in a web brows
 
 DEBUG:
     0)  Use aptitute to install if apt-get creates problems 
-	1) 	Confirm database connectivity string in line # 60 of db.py
-		(https://github.com/hasanatkazmi/NOPSA-Ribbon-API/blob/ff961a0c8a7fb537c57d420beb33f94503ce72d1/db.py#L69)
+	1) 	Confirm database connectivity string in config.py
 	2)	Confirm that line 137 of web/demp.htm conforms to the exact server address
 
