@@ -34,7 +34,7 @@ class Search(SearchBase):
         url = u"http://nopsa.hiit.fi/pmg/index.php/api/search?" + urllib.urlencode(self.args)
         search_results = urllib.urlopen(url)
         search_results = search_results.read()
-        print search_results
+        #print search_results
         dom = minidom.parseString(search_results)
         toreturn = list()
         for i in dom.getElementsByTagName("file"):

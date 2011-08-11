@@ -356,14 +356,23 @@ class ManageDB(object):
 
         toreturn = []
         
+        #print "crc of exact is: " , crc32(exact)
         #s = select([relation_table.c.imageid], relation_table.c.tagid == crc32(exact) ) # I forgot to filter the module out
-        s = select([relation_table.c.imageid], relation_table.c.tagid == crc32(exact), from_obj=[ relation_table.join( image_table, image_table.c.source == module )  ]  )
+        s = select([relation_table.c.imageid], from_obj=[ relation_table.join( image_table, and_( relation_table.c.imageid == image_table.c.id, image_table.c.source == module, relation_table.c.tagid == crc32(exact)) )  ]  )
+
+#SELECT relation.imageid
+#FROM relation
+#INNER JOIN images
+#ON (relation.imageid=images.id And images.source='google' And relation.tagid=-298042806)
+
+        #print "sql: " , s.__str__()
         #print s.__str__()
         result = engine.execute(s).fetchmany(150)
         myor = "or_(" + "".join(["image_table.c.id == " + str(image.imageid) + ", " for image in result]) + ")"
         myor = eval(myor)
         s = select([image_table], myor)
         #never fetch more than 150 exact images
+        #print "sql: ", s.__str__()
         result = engine.execute(s).fetchmany(150)
 
         #this is the algo which decides the balance b/w images
@@ -372,7 +381,7 @@ class ManageDB(object):
         total_images_in_one_partial_tag = 0
         if total_exact_images < 50:
             total_partial_images = 110-total_exact_images
-            total_images_in_one_partial_tag = total_partial_images / possible_tags
+            total_images_in_one_partial_tag = total_partial_images / len(possible_tags)
 
 
 
@@ -397,13 +406,14 @@ class ManageDB(object):
             image_dict["prirority"] = "exact"
             toreturn.append(image_dict)
 
+        #open("out-"+ module +".txt", "w").write(str(toreturn))
         
         #this one is to find matches for parts of query string, e.g. if query is "hello world", it finds results for BOTH "hello" and "world"
         #pervious loop(the one for exact matching) and this loop has somwhat idendical code , when updating this loop, consult that one
         if total_images_in_one_partial_tag != 0:
             for possible_tag in possible_tags:
                 #s = select([relation_table.c.imageid], relation_table.c.tagid == crc32(possible_tag) ) 
-                s = select([relation_table.c.imageid], relation_table.c.tagid == crc32(possible_tag), from_obj=[ relation_table.join( image_table, image_table.c.source == module )  ]  )
+                s = select([relation_table.c.imageid], from_obj=[ relation_table.join( image_table, and_( relation_table.c.imageid == image_table.c.id, image_table.c.source == module, relation_table.c.tagid == crc32(possible_tag)) )  ]  )
 
                 result = engine.execute(s).fetchmany( total_images_in_one_partial_tag )
                 myor = "or_(" + "".join(["image_table.c.id == " + str(image.imageid) + ", " for image in result]) + ")"
