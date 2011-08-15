@@ -7,9 +7,9 @@ This file MUST be updated after writing a new module
 
 #import your new module here
 from base import SuggestBase, SearchBase
-#from wikimedia import Suggest, Search
-#from google import Search
-import wikimedia, google, nopsa, loc
+
+#import wikimedia, google, nopsa, loc
+import wikimedia, google, nopsa
 
 #searchModules = list()
 #suggestionModules = list()
