@@ -231,6 +231,7 @@ settings = {
 
 from apitornado import Newkey, Allkeys, Deletekeys
 from relevancetornado import RelevanceTrend
+from CCCreator import CCCreator
 
 application = tornado.web.Application([
     (r"/", tornado.web.RedirectHandler, {"url": os.path.join(os.path.dirname(__file__), "index.htm")}),
@@ -239,7 +240,7 @@ application = tornado.web.Application([
     (r"/newkey", Newkey),
     (r"/allkeys", Allkeys),
     (r"/delkey", Deletekeys),
-
+    (r"/CCCreator", CCCreator),
     (r"/RelevanceTrend", RelevanceTrend),
 
     (r"/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(os.path.dirname(__file__), "web")}),
