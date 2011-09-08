@@ -53,6 +53,7 @@ Please don't skip step 4 and 5 as it will update other installed binaries which 
 	wget -O ribbon.tar.gz https://github.com/hasanatkazmi/NOPSA-Ribbon-API/tarball/master
 	tar -xvvf ribbon.tar.gz
 	cd hasanatkazmi*
+    cd serverside
 	python2.6 tornado.py
 
 
