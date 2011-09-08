@@ -1,0 +1,32 @@
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\PowerPointAddInOne.dll
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\PowerPointAddInOne.pdb
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\PowerPointAddInOne.dll.manifest
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\PowerPointAddInOne.vsto
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\websocket-sharp.dll
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\websocket-sharp.pdb
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.NopsaImage.resources
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.NOPSAribbon.resources
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.Properties.Resources.resources
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.SearchUserControl.resources
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.dll
+C:\Users\hp\Documents\Visual Studio 2010\Projects\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.pdb
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\PowerPointAddInOne.dll
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\PowerPointAddInOne.pdb
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\PowerPointAddInOne.dll.manifest
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\PowerPointAddInOne.vsto
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.NopsaImage.resources
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.NOPSAribbon.resources
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.Properties.Resources.resources
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.SearchUserControl.resources
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.dll
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.pdb

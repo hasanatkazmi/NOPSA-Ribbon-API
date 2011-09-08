@@ -1,0 +1,54 @@
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\Open Images.dll.config
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\Open Images.dll
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\Open Images.pdb
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\Open Images.dll.manifest
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\Open Images.vsto
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.NopsaImage.resources
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.NOPSAribbon.resources
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.Properties.Resources.resources
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.SearchUserControl.resources
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\Open Images.dll
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Debug\Open Images.pdb
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Open Images.dll.config
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Open Images.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Open Images.pdb
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Open Images.dll.manifest
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Open Images.vsto
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Accessibility.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.CSharp.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Interop.PowerPoint.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.v4.0.Framework.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.VisualBasic.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.VisualStudio.Tools.Applications.Runtime.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\stdole.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\System.Data.DataSetExtensions.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\System.Data.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\System.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\System.Drawing.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\System.Windows.Forms.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\System.Xml.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\System.Xml.Linq.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.xml
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.v4.0.Framework.xml
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.VisualStudio.Tools.Applications.Runtime.xml
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.xml
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.CCLicense.resources
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.NopsaImage.resources
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.NOPSAribbon.resources
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.Properties.Resources.resources
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.SearchUserControl.resources
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\GenerateResource.read.1.tlog
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\GenerateResource.write.1.tlog
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\Open Images.dll
+C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\Open Images.pdb

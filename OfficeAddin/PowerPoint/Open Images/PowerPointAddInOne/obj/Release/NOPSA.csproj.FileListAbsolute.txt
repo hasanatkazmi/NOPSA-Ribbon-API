@@ -1,0 +1,7 @@
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Release\ResolveAssemblyReference.cache
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Release\PowerPointAddInOne.NopsaImage.resources
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Release\PowerPointAddInOne.NOPSAribbon.resources
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Release\PowerPointAddInOne.Properties.Resources.resources
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Release\PowerPointAddInOne.SearchUserControl.resources
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Release\GenerateResource.read.1.tlog
+C:\Users\hp\Desktop\PowerPointAddInOne\PowerPointAddInOne\obj\Release\GenerateResource.write.1.tlog
