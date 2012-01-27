@@ -52,3 +52,42 @@ C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\GenerateResource.re
 C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\GenerateResource.write.1.tlog
 C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\Open Images.dll
 C:\Users\hp\Desktop\Open Images\PowerPointAddInOne\obj\Debug\Open Images.pdb
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Open Images.dll.config
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Open Images.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Open Images.pdb
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Open Images.dll.manifest
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Open Images.vsto
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Accessibility.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.CSharp.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Interop.PowerPoint.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.v4.0.Framework.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.VisualBasic.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.VisualStudio.Tools.Applications.Runtime.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\stdole.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\System.Data.DataSetExtensions.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\System.Data.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\System.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\System.Drawing.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\System.Windows.Forms.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\System.Xml.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\System.Xml.Linq.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Vbe.Interop.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.xml
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.v4.0.Framework.xml
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.VisualStudio.Tools.Applications.Runtime.xml
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.xml
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\ResolveAssemblyReference.cache
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.CCLicense.resources
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.NopsaImage.resources
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.NOPSAribbon.resources
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.Properties.Resources.resources
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.SearchUserControl.resources
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\GenerateResource.read.1.tlog
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\GenerateResource.write.1.tlog
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\Open Images.dll
+D:\hiit\NOPSA-Ribbon-API\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\Open Images.pdb

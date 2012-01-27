@@ -42,11 +42,6 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
-      <assemblyIdentity name="Microsoft.Vbe.Interop" version="12.0.0.0" publicKeyToken="71E9BCE111E9429C" language="neutral" />
-    </dependentAssembly>
-  </dependency>
-  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Office.Interop.PowerPoint.dll" size="248632">
       <assemblyIdentity name="Microsoft.Office.Interop.PowerPoint" version="12.0.0.0" publicKeyToken="71E9BCE111E9429C" language="neutral" />
       <hash>
@@ -107,6 +102,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Vbe.Interop.dll" size="64288">
+      <assemblyIdentity name="Microsoft.Vbe.Interop" version="12.0.0.0" publicKeyToken="71E9BCE111E9429C" language="neutral" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>YbI1svFIM4RtJSmjR1pDQuXTMo8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.VisualBasic.PowerPacks.Vs.dll" size="259464">
       <assemblyIdentity name="Microsoft.VisualBasic.PowerPacks.Vs" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -131,14 +138,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Open Images.dll" size="105984">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Open Images.dll" size="151552">
       <assemblyIdentity name="Open Images" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>OfrThVQjUL0aPseyeMkxLS0WvZk=</dsig:DigestValue>
+        <dsig:DigestValue>qGPS9y58iKcIQEe6PT0mfBdRLR8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -166,13 +173,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Open Images.dll.config" size="147">
+  <file name="Open Images.dll.config" size="69">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>dWs9/tD8+8A2cktfL86cpEru8r4=</dsig:DigestValue>
+      <dsig:DigestValue>ixRjjbYm3JJJLGYuOwWjrGSF1Uk=</dsig:DigestValue>
     </hash>
   </file>
   <vstav3:addIn xmlns:vstav3="urn:schemas-microsoft-com:vsta.v3">
@@ -200,4 +207,4 @@
       </vstov4:customizations>
     </vstav3:application>
   </vstav3:addIn>
-<publisherIdentity name="CN=hp-PC\hp" issuerKeyHash="8aff72f2931ec1a7a793ab108a9095653ec239e7" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>fbtTGtDHSqMa7nyt+r+fJiHwabk=</DigestValue></Reference></SignedInfo><SignatureValue>hsYCyVtgdWbhK0CKa5b/+oXb29sLLda1QSwYOMbNGNoJytB9JYDdSt1fnvPw/tTxCwBzKtw1xzixsf7oY0Ztf0f5kLC7BnyJBi5HwYI6SwfUyfgQD+nQ0KLVYyawEc7a2l/4a1rbL2CVchYNWp/pQfPQM95MW5Sz8OKmHOhdi1A=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>jLg6iHoSjQ4F+MZL1EsMTs2heABTPGzn2WCNGIGUNT/ls1PP+75VtazCkozgBNVw32eIO5v0K2RPnV3/c5A+Fegu+4Nyze/VxhMl84qFPRP/h7yhB9PO/COZwFWX7GeQ7axa0lHJ3/666JodmQy9xOrTq+fDh11lSKgNMihip7c=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="b969f021269fbffaad7cee1aa34ac7d01a53bb7d" Description="" Url=""><as:assemblyIdentity name="Open Images.dll" version="1.0.0.32" publicKeyToken="84464b7ffbf21846" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=hp-PC\hp</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>GgkAjzs+3VzNvI5Ujf6sypVcP5A=</DigestValue></Reference></SignedInfo><SignatureValue>KGr0w4fLNQsF6BV7nl89xHsP/qa/TnEWi1vtPGIsDvcdjIIWZygLP4IXyui+s4b4nMB9tyDqCt+a3EFbIMjtKDWgKKOIXA4CRBz9ZroSHtRgX6o0cc/S85Y1ThXHJgTXHJECMF7xoKPBVdU6fp8GsZX/+d2IRuvj6BF+bRiqutk=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>jLg6iHoSjQ4F+MZL1EsMTs2heABTPGzn2WCNGIGUNT/ls1PP+75VtazCkozgBNVw32eIO5v0K2RPnV3/c5A+Fegu+4Nyze/VxhMl84qFPRP/h7yhB9PO/COZwFWX7GeQ7axa0lHJ3/666JodmQy9xOrTq+fDh11lSKgNMihip7c=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBuTCCASKgAwIBAgIQI/t58r17Z4VGBqNk73ie5jANBgkqhkiG9w0BAQUFADAbMRkwFwYDVQQDHhAAaABwAC0AUABDAFwAaABwMB4XDTExMDcxNjA1MzMzMloXDTEyMDcxNTExMzMzMlowGzEZMBcGA1UEAx4QAGgAcAAtAFAAQwBcAGgAcDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAjLg6iHoSjQ4F+MZL1EsMTs2heABTPGzn2WCNGIGUNT/ls1PP+75VtazCkozgBNVw32eIO5v0K2RPnV3/c5A+Fegu+4Nyze/VxhMl84qFPRP/h7yhB9PO/COZwFWX7GeQ7axa0lHJ3/666JodmQy9xOrTq+fDh11lSKgNMihip7cCAwEAATANBgkqhkiG9w0BAQUFAAOBgQAeXJNbP67mU9bcgNXEOYIAtDUjk1H2dk9yD2hMZrnCZ4Kfd3sA5aWVwn8t9RDzTY/UaPUEV5QNd/gIliisGH6XPLRg14sWa/AU27yZkHvEdW7g/RQYSuPTDiI2ZnGf8tduM+i1FP2dkGLLNzg7jbw1ekCI7wY/NRQf4zh/FK+XvA==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
+<publisherIdentity name="CN=hp-PC\hp" issuerKeyHash="8aff72f2931ec1a7a793ab108a9095653ec239e7" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>X0D9SEFbizoneHHiQqBENhvNvuo=</DigestValue></Reference></SignedInfo><SignatureValue>I8fBzwWbkrBLNG39UY3oXU6pKAdAhlLZiqRCOWwpRJPgXHtR+3J7hapxbGVv9IP+qrPuGeJhcOT/x93FlKzdYfYV43Nt09ChJ0KeFRvtBTqXlRfD6l2kpCSkoiTfFYWJm91SXW/BCedUZUSl5M0qpheLnLlPuWKrLSeYKJtYMDI=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>jLg6iHoSjQ4F+MZL1EsMTs2heABTPGzn2WCNGIGUNT/ls1PP+75VtazCkozgBNVw32eIO5v0K2RPnV3/c5A+Fegu+4Nyze/VxhMl84qFPRP/h7yhB9PO/COZwFWX7GeQ7axa0lHJ3/666JodmQy9xOrTq+fDh11lSKgNMihip7c=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="eabecd1b3644a042e27178273a8b5b4148fd405f" Description="" Url=""><as:assemblyIdentity name="Open Images.dll" version="1.0.0.32" publicKeyToken="84464b7ffbf21846" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=hp-PC\hp</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>y43j/DfKALxYej3eHGCVaG/zyJE=</DigestValue></Reference></SignedInfo><SignatureValue>E5Ca2dUpBXQzn0c0RL7hr2+FQTHYNk1bioBVxbn04w42S4u+T5dvko4klo7B9Hok92K/jUTen1W41E/5wopkp8XLRHT1esK3NPq/u4lYL3udEDI2XwnJB5NyuwFtdkgmhBmUllsKOrWcts87M+zHi7Iue6O4462FHhuyGX2ec4g=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>jLg6iHoSjQ4F+MZL1EsMTs2heABTPGzn2WCNGIGUNT/ls1PP+75VtazCkozgBNVw32eIO5v0K2RPnV3/c5A+Fegu+4Nyze/VxhMl84qFPRP/h7yhB9PO/COZwFWX7GeQ7axa0lHJ3/666JodmQy9xOrTq+fDh11lSKgNMihip7c=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBuTCCASKgAwIBAgIQI/t58r17Z4VGBqNk73ie5jANBgkqhkiG9w0BAQUFADAbMRkwFwYDVQQDHhAAaABwAC0AUABDAFwAaABwMB4XDTExMDcxNjA1MzMzMloXDTEyMDcxNTExMzMzMlowGzEZMBcGA1UEAx4QAGgAcAAtAFAAQwBcAGgAcDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAjLg6iHoSjQ4F+MZL1EsMTs2heABTPGzn2WCNGIGUNT/ls1PP+75VtazCkozgBNVw32eIO5v0K2RPnV3/c5A+Fegu+4Nyze/VxhMl84qFPRP/h7yhB9PO/COZwFWX7GeQ7axa0lHJ3/666JodmQy9xOrTq+fDh11lSKgNMihip7cCAwEAATANBgkqhkiG9w0BAQUFAAOBgQAeXJNbP67mU9bcgNXEOYIAtDUjk1H2dk9yD2hMZrnCZ4Kfd3sA5aWVwn8t9RDzTY/UaPUEV5QNd/gIliisGH6XPLRg14sWa/AU27yZkHvEdW7g/RQYSuPTDiI2ZnGf8tduM+i1FP2dkGLLNzg7jbw1ekCI7wY/NRQf4zh/FK+XvA==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

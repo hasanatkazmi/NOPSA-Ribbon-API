@@ -121,28 +121,40 @@
   <data name="ajax_loader" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ajax-loader.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="download" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="down_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\down-grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="down_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\down_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hand_contra" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hand_contra.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="hand_pro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hand_pro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sq_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sq_plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="up_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\up-green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="hand_contra" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hand_contra.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="down_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\down-grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sq_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sq_plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="down_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\down_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="contact" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\contact.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="about" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\about.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="download" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="up_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\up-grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
