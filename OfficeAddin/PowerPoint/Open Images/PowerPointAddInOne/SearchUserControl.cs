@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
+using Microsoft.Office.Core;
+using Microsoft.Win32;
 
 namespace PowerPointAddInOne
 {
@@ -55,6 +57,51 @@ namespace PowerPointAddInOne
             loading_search.Left = (Width - loading_search.Width) / 2;
             loading_search.Hide();
 
+
+
+            //ATTEMPTS
+            //ThemeColor th;
+            //this.BackColor = Color.FromArgb(th.RGB);
+
+
+
+
+            //set colorschemes of ui components according to color scheme..
+            //THIS IS NOT WORKING
+            const string OfficeCommonKey =  @"Software\Microsoft\Office\12.0\Common";
+            const string OfficeThemeValueName = "Theme";
+            const int ThemeBlue = 1;
+            const int ThemeSilver = 2;
+            const int ThemeBlack = 3;
+
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(OfficeCommonKey, false))
+            {
+                int theme = (int)key.GetValue(OfficeThemeValueName, 1);
+
+                switch (theme)
+                {
+                    case ThemeBlue:
+                        //...
+                        settings_listbox.BackColor = Color.FromArgb(224, 199, 178);
+                        this.BackColor = Color.FromArgb(224, 199, 178);
+                        Debug.WriteLine("blue");
+                        break;
+                    case ThemeSilver:
+                        //...
+                        Debug.WriteLine("silver");
+                        break;
+                    case ThemeBlack:
+                        //...
+                        Debug.WriteLine("black");
+                        this.BackColor = Color.FromArgb(161, 161, 161);
+                        settings_listbox.BackColor = Color.FromArgb(161, 161, 161);
+                        break;
+                    default:
+                        //...
+                        Debug.WriteLine("def");
+                        break;
+                }
+            }
         }
 
         //search button
@@ -67,7 +114,14 @@ namespace PowerPointAddInOne
                 MessageBox.Show("Please enter something");
                 return;
             }
-            cm.search(searchTB.Text);
+            if (settings_listbox.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Please choose at least one data source in 'settings'");
+                return;
+            }
+            String[] temp = new String[5];
+            settings_listbox.CheckedItems.CopyTo(temp, 0);
+            cm.search(searchTB.Text, temp);
             search_data_recieved = false;
             scrollpanel.Controls.Clear();
             loading_search.Show();
@@ -285,11 +339,15 @@ namespace PowerPointAddInOne
         {
             if (ThisAddIn.isstarted)
             {
-                searchTB.Width = ThisAddIn.searchUC.Width - 40;
+                //searchTB.Width = ThisAddIn.searchUC.Width - 40;
+                searchTB.Width = ThisAddIn.searchUC.Width - 80;
                 searchBtn.Width = 33;
+                settings_btn.Width = 33;
 
                 searchTB.Left = 2;
-                searchBtn.Left = searchTB.Width+6;
+                searchBtn.Left = searchTB.Width + settings_btn.Width + 6;
+                settings_btn.Left = searchTB.Width + 6;
+                settings_btn.Top = searchBtn.Top;
 
                 //scrollpanel.Left = Width - scrollpanel.Width;
                 scrollpanel.Width = Width - 2 ;
@@ -456,6 +514,12 @@ namespace PowerPointAddInOne
         private void back_page_btn_Click(object sender, EventArgs e)
         {
             loadscrollpanel(true);
+        }
+
+        private void settings_btn_Click(object sender, EventArgs e)
+        {
+            if (settings_listbox.Visible) settings_listbox.Hide();
+            else settings_listbox.Show();
         }
 
 

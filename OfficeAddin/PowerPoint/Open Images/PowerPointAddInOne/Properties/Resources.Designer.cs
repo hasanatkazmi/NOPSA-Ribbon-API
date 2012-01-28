@@ -130,6 +130,13 @@ namespace PowerPointAddInOne.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap settings {
+            get {
+                object obj = ResourceManager.GetObject("settings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap sq_plus {
             get {
                 object obj = ResourceManager.GetObject("sq_plus", resourceCulture);

@@ -442,8 +442,9 @@ namespace PowerPointAddInOne
             send(xml);
         }
 
-        public void search(string query)
+        public void search(string query, string[] sources)
         {
+            //TODO: implement sendng sources to the server and server should also be made to do selective searches
             //resetting data bank
             Search_Data.init(query);
 
