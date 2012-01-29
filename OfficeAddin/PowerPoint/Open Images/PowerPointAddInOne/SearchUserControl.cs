@@ -58,6 +58,11 @@ namespace PowerPointAddInOne
             loading_search.Hide();
 
 
+            //setting all image sources checked by default (couldnt find a visual way to do so)
+            for (int i = 0; i < settings_listbox.Items.Count; i++)
+            {
+                settings_listbox.SetItemCheckState(i, System.Windows.Forms.CheckState.Checked);
+            }
 
             //ATTEMPTS
             //ThemeColor th;
