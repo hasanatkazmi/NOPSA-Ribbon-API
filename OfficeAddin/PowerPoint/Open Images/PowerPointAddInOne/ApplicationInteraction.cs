@@ -124,6 +124,27 @@ namespace PowerPointAddInOne
 
             foreach (NOPSAImageHolder image in imagesadded)
             {
+                //Photo "name of the photo" by "author name" "source"
+                //is licensed with "name of the license or public domain" "URI of the license"
+
+                Shape addedtext = addedslide.Shapes.AddTextbox(Microsoft.Office.Core.MsoTextOrientation.msoTextOrientationHorizontal, 80, top, element_width, 12);
+                String creatorname = image.img_creator.Trim();
+                if (creatorname.Equals("")) creatorname = "Unknown";
+                String imgsource = image.img_source.Trim();
+                imgsource = imgsource.Substring(0, 1).ToUpper() + imgsource.Substring(1);
+
+                addedtext.TextFrame.TextRange.Text = "Image by " + creatorname + ", " + imgsource;
+                addedtext.TextFrame.TextRange.Font.Bold = Microsoft.Office.Core.MsoTriState.msoTrue;
+                addedtext.TextFrame.WordWrap = Microsoft.Office.Core.MsoTriState.msoTrue;
+                addedtext.TextFrame.TextRange.Font.Size = 10;
+
+                Shape addedurl = addedslide.Shapes.AddTextbox(Microsoft.Office.Core.MsoTextOrientation.msoTextOrientationHorizontal, 80, top + addedtext.Height - 6, element_width, 12);
+                addedurl.TextFrame.TextRange.Text = "is licensed with " + image.img_rights + " http://creativecommons.org/licenses/";
+                addedurl.TextFrame.WordWrap = Microsoft.Office.Core.MsoTriState.msoTrue;
+                addedurl.ActionSettings[PpMouseActivation.ppMouseClick].Hyperlink.Address = image.img_holder;
+                addedurl.TextFrame.TextRange.Font.Size = 9;
+
+                /*
                 Shape addedtext = addedslide.Shapes.AddTextbox(Microsoft.Office.Core.MsoTextOrientation.msoTextOrientationHorizontal, 80, top, element_width, 12);
                 addedtext.TextFrame.TextRange.Text = "Rights / Creator: " + image.img_rights + " "  + image.img_creator;
                 addedtext.TextFrame.TextRange.Font.Bold = Microsoft.Office.Core.MsoTriState.msoTrue;
@@ -135,6 +156,7 @@ namespace PowerPointAddInOne
                 addedurl.TextFrame.WordWrap = Microsoft.Office.Core.MsoTriState.msoTrue;
                 addedurl.ActionSettings[PpMouseActivation.ppMouseClick].Hyperlink.Address = image.img_holder;
                 addedurl.TextFrame.TextRange.Font.Size = 9;
+                */
 
                 top = addedurl.Top + addedurl.Height;
             }

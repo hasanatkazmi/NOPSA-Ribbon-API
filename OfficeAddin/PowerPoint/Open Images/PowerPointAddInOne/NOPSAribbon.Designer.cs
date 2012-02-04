@@ -37,14 +37,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NOPSAribbon));
             this.tab12 = this.Factory.CreateRibbonTab();
             this.Search = this.Factory.CreateRibbonGroup();
-            this.CC = this.Factory.CreateRibbonGroup();
-            this.About = this.Factory.CreateRibbonGroup();
-            this.Contact = this.Factory.CreateRibbonGroup();
-            this.Help = this.Factory.CreateRibbonGroup();
             this.searchBtn = this.Factory.CreateRibbonButton();
+            this.CC = this.Factory.CreateRibbonGroup();
             this.cc_btn = this.Factory.CreateRibbonButton();
+            this.About = this.Factory.CreateRibbonGroup();
             this.about_btn = this.Factory.CreateRibbonButton();
+            this.Contact = this.Factory.CreateRibbonGroup();
             this.contact_btn = this.Factory.CreateRibbonButton();
+            this.Help = this.Factory.CreateRibbonGroup();
             this.help_btn = this.Factory.CreateRibbonButton();
             this.tab12.SuspendLayout();
             this.Search.SuspendLayout();
@@ -70,30 +70,6 @@
             this.Search.Label = "Search";
             this.Search.Name = "Search";
             // 
-            // CC
-            // 
-            this.CC.Items.Add(this.cc_btn);
-            this.CC.Label = "Creative Common";
-            this.CC.Name = "CC";
-            // 
-            // About
-            // 
-            this.About.Items.Add(this.about_btn);
-            this.About.Label = "About";
-            this.About.Name = "About";
-            // 
-            // Contact
-            // 
-            this.Contact.Items.Add(this.contact_btn);
-            this.Contact.Label = "Contact Us";
-            this.Contact.Name = "Contact";
-            // 
-            // Help
-            // 
-            this.Help.Items.Add(this.help_btn);
-            this.Help.Label = "Help";
-            this.Help.Name = "Help";
-            // 
             // searchBtn
             // 
             this.searchBtn.Image = ((System.Drawing.Image)(resources.GetObject("searchBtn.Image")));
@@ -102,6 +78,12 @@
             this.searchBtn.ShowImage = true;
             this.searchBtn.ShowLabel = false;
             this.searchBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.searchBtn_Click);
+            // 
+            // CC
+            // 
+            this.CC.Items.Add(this.cc_btn);
+            this.CC.Label = "Creative Common";
+            this.CC.Name = "CC";
             // 
             // cc_btn
             // 
@@ -112,6 +94,12 @@
             this.cc_btn.ShowImage = true;
             this.cc_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.cc_btn_Click);
             // 
+            // About
+            // 
+            this.About.Items.Add(this.about_btn);
+            this.About.Label = "About";
+            this.About.Name = "About";
+            // 
             // about_btn
             // 
             this.about_btn.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -121,6 +109,12 @@
             this.about_btn.ShowImage = true;
             this.about_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.about_btn_Click);
             // 
+            // Contact
+            // 
+            this.Contact.Items.Add(this.contact_btn);
+            this.Contact.Label = "Contact Us";
+            this.Contact.Name = "Contact";
+            // 
             // contact_btn
             // 
             this.contact_btn.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -129,6 +123,12 @@
             this.contact_btn.Name = "contact_btn";
             this.contact_btn.ShowImage = true;
             this.contact_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.contact_btn_Click);
+            // 
+            // Help
+            // 
+            this.Help.Items.Add(this.help_btn);
+            this.Help.Label = "Help";
+            this.Help.Name = "Help";
             // 
             // help_btn
             // 
