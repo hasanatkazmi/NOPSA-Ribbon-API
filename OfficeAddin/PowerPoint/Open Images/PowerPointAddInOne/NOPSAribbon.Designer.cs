@@ -34,12 +34,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NOPSAribbon));
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tab12 = this.Factory.CreateRibbonTab();
             this.Search = this.Factory.CreateRibbonGroup();
             this.searchBtn = this.Factory.CreateRibbonButton();
             this.CC = this.Factory.CreateRibbonGroup();
             this.cc_btn = this.Factory.CreateRibbonButton();
+            this.settings_group = this.Factory.CreateRibbonGroup();
+            this.settings_img = this.Factory.CreateRibbonButton();
             this.About = this.Factory.CreateRibbonGroup();
             this.about_btn = this.Factory.CreateRibbonButton();
             this.Contact = this.Factory.CreateRibbonGroup();
@@ -49,15 +53,23 @@
             this.tab12.SuspendLayout();
             this.Search.SuspendLayout();
             this.CC.SuspendLayout();
+            this.settings_group.SuspendLayout();
             this.About.SuspendLayout();
             this.Contact.SuspendLayout();
             this.Help.SuspendLayout();
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // tab12
             // 
             this.tab12.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
             this.tab12.Groups.Add(this.Search);
             this.tab12.Groups.Add(this.CC);
+            this.tab12.Groups.Add(this.settings_group);
             this.tab12.Groups.Add(this.About);
             this.tab12.Groups.Add(this.Contact);
             this.tab12.Groups.Add(this.Help);
@@ -93,6 +105,21 @@
             this.cc_btn.Name = "cc_btn";
             this.cc_btn.ShowImage = true;
             this.cc_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.cc_btn_Click);
+            // 
+            // settings_group
+            // 
+            this.settings_group.Items.Add(this.settings_img);
+            this.settings_group.Label = "Settings";
+            this.settings_group.Name = "settings_group";
+            // 
+            // settings_img
+            // 
+            this.settings_img.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.settings_img.Image = global::PowerPointAddInOne.Properties.Resources.settings;
+            this.settings_img.Label = " ";
+            this.settings_img.Name = "settings_img";
+            this.settings_img.ShowImage = true;
+            this.settings_img.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.settings_img_Click);
             // 
             // About
             // 
@@ -152,6 +179,8 @@
             this.Search.PerformLayout();
             this.CC.ResumeLayout(false);
             this.CC.PerformLayout();
+            this.settings_group.ResumeLayout(false);
+            this.settings_group.PerformLayout();
             this.About.ResumeLayout(false);
             this.About.PerformLayout();
             this.Contact.ResumeLayout(false);
@@ -174,6 +203,9 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton contact_btn;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup Help;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton help_btn;
+        private System.Windows.Forms.ImageList imageList1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup settings_group;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton settings_img;
 
     }
 

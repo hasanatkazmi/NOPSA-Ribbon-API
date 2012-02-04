@@ -80,6 +80,11 @@ Click OK to open your default email client to sent email to Herkko Hietanen <her
             System.Diagnostics.Process.Start(@"http://ec2-107-20-212-167.compute-1.amazonaws.com:8000/help.htm");
         }
 
+        private void settings_img_Click(object sender, RibbonControlEventArgs e)
+        {
+
+        }
+
 
 
     }
