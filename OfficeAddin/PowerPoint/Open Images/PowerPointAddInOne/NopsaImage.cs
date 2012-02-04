@@ -26,6 +26,7 @@ namespace PowerPointAddInOne
 
             InitializeComponent();
 
+
             imageholder = imgholder;
 
             line.X1 = 0;
@@ -36,6 +37,7 @@ namespace PowerPointAddInOne
             this.cm = cm;
             
         }
+
 
         String newtagtb_defaulttext = " + add a tag";
 

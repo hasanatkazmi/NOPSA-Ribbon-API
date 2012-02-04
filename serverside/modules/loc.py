@@ -1,5 +1,95 @@
-xÅVËn›Pí6þ
-«»Iœ„¬°mb,LÚ¤;×1
-H©Ê—uÑOê/tî‹—&UÕÚòÂs/Ì™3gë0^Š|,¿ûùýÇÈšÜö¾õFÚørf[×‹‰8¶LËV…¯Û C½ƒ©µpÄ©ve˜·ªpø%¾¹‡„ÔR1EI°á—VÆg]dIz–+ÍžÑÔ§Ž*H»çÂäXKbé½ô–Øõ[œ’÷›ÆBçº1›ÃûåÁ.+Œ,Ç±®j^)y	6”£(ÎP3BC>àqÓW”áðüo_e§é>PjYj“‰±˜‰6‹œ¡¢Mœ¹ë°%„þFÚHHÀ#Ëžè¶È=³Ðp†„4¿¸±šÚr)õâ0tw)V{œ²Ùñ0ƒ×qƒÈ éœPJµDS]‘OW¦¨3bÈ:+ 7†Ãó)‘\.9oNUUALUJ‹¾(Ê kÏWV=/¾‡¿‚¼ŸJ\q¨‹0°0yŸXuDqòà†Xã[äú(iVyßCÞæÜ+«K¤JUj2h¸Q‘Aù¼ˆ	ç¦Ó:}!xë·Å¤KúhzÒSA_]öuzóón@ÉRG­¥Ø’rZß•«˜—K-¯…çÅQ†¢¬Eèz¥BÿÏ"àÝŽ
-Ê,Ïyw„b<˜þ¼¬ò¼7aÐÔ0ˆî1‡œvÏ<:ú#Nô±ekŽa-Tá1‚šƒë°kêSÂ\õ›ÅÇ®—OD9õãÓmüDË·8TR^çrK¶%‰õ‹:Mt¾	ÃR÷á.sjË­R!3™Xª]¡íÆ1zÈâ€Š–sËevF)·²¬W¯ÉË€èœÊ<65ñ³}`¸uä°òAXiá¬­SÇlü¿5Øô\ÃX”¿†E<)Ï“N0ØññïÓ1ZÉN3	ûË
-ÏÏùÚ|gÓX9âÊ¹5a—H¿<º	n0ŒÖâ¥Žµµ¢³þÓÀqt¡,'ú=ïÜÈçËÖøÚ^á}y6ÀËNi…Ãâ'ª°]ïŸñEŠ”ÿÄX-M–j2+àtÇ¸-ï¯âlKºèÕË”Žìò’ÀnÙD¼Š1„eYÝ¥à¨²WN–7øÂ…;8$E3t°$¸ÛBvÜä.ˆDòïùX¤/½_ïÏY×
+#!/usr/bin/python2.6
+
+#LOC means library of Congress
+
+import urllib
+import urllib2
+from xml.dom import minidom 
+from base import SuggestBase, SearchBase
+import copy
+
+#Currently not implementing suggest.. API needs to be looked into.
+
+name = "loc"
+
+class Search(SearchBase):
+    '''
+    '''
+    MAX = 10
+    def __init__(self, query, images = MAX):
+        '''
+        query has to LOC LCDB using LRU
+        http://lx2.loc.gov:210/LCDB?operation=searchRetrieve&version=1.1&query=dc.title=%22abraham%20lincoln%22%20and%20dc.resourceType=graphic&recordSchema=dc&startRecord=1&maximumRecords=10
+
+        NOTIC: query attribute if added here will break in search funtion because urlencode will also encode spaces etc which is against SRU's methods. So query attribute is added in search seperatly
+        '''
+        self.args = {
+            u"operation" : u"searchRetrieve" ,
+            u"version" : u"1.1" ,
+            u"recordSchema" : u"dc" ,
+            u"startRecord" : u"1" ,
+            u"maximumRecords" : str(images).encode('utf-8') ,
+        }
+        self.query = query
+        self.results = self.search()
+
+
+    def search(self):
+        '''
+
+        '''
+        #url = "http://lx2.loc.gov:210/LCDB?" + urllib.urlencode(self.args) + "&query=" + "dc.title=\"" + self.query + "\" and dc.resourceType=graphic"
+        url =  u"http://lx2.loc.gov:210/LCDB?" + urllib.urlencode(self.args) + u"&query=" + u"dc.title=%22" + self.query.replace(" ","%20") + u"%22%20and%20dc.resourceType=graphic"
+        #url = "http://lx2.loc.gov:210/LCDB?startRecord=1&operation=searchRetrieve&version=1.1&maximumRecords=10&recordSchema=dc&query=dc.title=%22abraham%20lincoln%22%20and%20dc.resourceType=graphic"
+        #print url
+        #search_results = urllib.urlopen(url)
+        search_results = urllib2.urlopen(url)
+        #print "opened"
+        #print search_results.read()
+        #return "adsf"	
+        dom = minidom.parseString(search_results.read())
+        toreturn = list()
+        for i in dom.getElementsByTagName("zs:recordData"):
+            #toadd = []
+            toadd = copy.copy(self.result)
+            try:
+                #toadd.append( i.getElementsByTagName("identifier")[0].childNodes[0].data)
+                toadd["contexturl"] = i.getElementsByTagName("identifier")[0].childNodes[0].data
+            except: 
+                # if there is no identifier that means we cant retrive the image to just pass it
+                #toadd.append( "" )
+                continue
+
+            try:
+                #toadd.append( i.getElementsByTagName("rights")[0].childNodes[0].data )
+                toadd["rights"] = i.getElementsByTagName("rights")[0].childNodes[0].data 
+            #except: toadd.append( "" )
+            except: pass
+            
+            try:
+                #toadd.append( i.getElementsByTagName("creator")[0].childNodes[0].data )
+                toadd["creator"] = i.getElementsByTagName("creator")[0].childNodes[0].data 
+            #except: toadd.append( "" )
+            except: pass
+
+            
+            #this MUST be fixed after getting the real url by the help of LOC staff
+            toadd["url"] = toadd["contexturl"]
+
+            toreturn.append( toadd )
+
+            #toreturn.append( [
+            #            i.getElementsByTagName("identifier")[0].childNodes[0].data ,
+            #            i.getElementsByTagName("rights")[0].childNodes[0].data,
+            #            i.getElementsByTagName("creator")[0].childNodes[0].data,
+            #                ])
+
+        return toreturn
+
+
+if __name__ == "__main__":
+    #w = Wikimedia("Pakistan International Airlines")
+    #print w.results
+
+    w = Search("abraham lincoln")
+    print w.results

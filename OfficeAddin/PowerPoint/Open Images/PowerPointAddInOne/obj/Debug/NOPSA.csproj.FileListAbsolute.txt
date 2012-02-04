@@ -130,3 +130,4 @@ D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Mic
 D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.VisualStudio.Tools.Applications.Runtime.xml
 D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.xml
 D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Gma.UserActivityMonitor.dll

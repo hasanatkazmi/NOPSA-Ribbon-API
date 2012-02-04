@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace PowerPointAddInOne
 {
     partial class NopsaImage
@@ -163,6 +165,12 @@ namespace PowerPointAddInOne
             this.PerformLayout();
 
         }
+
+
+
+
+
+
 
         #endregion
 
