@@ -123,3 +123,4 @@ D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\Gen
 D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\GenerateResource.write.1.tlog
 D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\Open Images.dll
 D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\Open Images.pdb
+D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.AboutForm.resources

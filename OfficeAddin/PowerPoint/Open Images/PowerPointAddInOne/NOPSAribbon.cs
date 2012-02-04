@@ -45,16 +45,9 @@ namespace PowerPointAddInOne
 
         private void about_btn_Click(object sender, RibbonControlEventArgs e)
         {
-            //MessageBox.Show("Error Message", "Error Title", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            MessageBox.Show(@"
-Copyright (C) 2011 Hasanat Kazmi & Herkko Hietanen (Helsinki Institute for Information Technology), Sponsored by Google Summer of Code 2011
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ""Software""), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
-            "About", MessageBoxButtons.OK);
+            //change the link to reflect permanent one
+            new AboutForm("Open Images", "http://ec2-107-20-212-167.compute-1.amazonaws.com:8000/index.htm").Show();
         }
 
                 

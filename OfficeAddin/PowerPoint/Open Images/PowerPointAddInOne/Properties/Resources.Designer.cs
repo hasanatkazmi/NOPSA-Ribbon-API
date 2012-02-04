@@ -130,6 +130,20 @@ namespace PowerPointAddInOne.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap hiit_logo {
+            get {
+                object obj = ResourceManager.GetObject("hiit-logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap hiit_logo1 {
+            get {
+                object obj = ResourceManager.GetObject("hiit-logo1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap settings {
             get {
                 object obj = ResourceManager.GetObject("settings", resourceCulture);
