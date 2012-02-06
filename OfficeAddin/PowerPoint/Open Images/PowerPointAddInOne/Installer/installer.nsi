@@ -20,7 +20,7 @@ Var bits
 Function osnotsupported
     DetailPrint "os is not supported"
 	MessageBox MB_OK "You OS is not supported, please upgrade. Installer will abort now."
-    Abort
+    Quit
 FunctionEnd
 
 Function GetServicePack
@@ -38,14 +38,14 @@ FunctionEnd
 
 Function installspxp
 	DetailPrint "Upgrading Service Pack required"
-	MessageBox MB_OK "You have to update your Windows XP for installing Open Images. Please download and install Windows Xp Service Pack 2 or 3 for $bits from http://download.microsoft.com"
-	Abort
+	MessageBox MB_OK "You have to update your Windows XP for installing Open Images. Please download and install Windows Xp Service Pack 2 or 3 for $bits from http://download.microsoft.com. Installer will quit now."
+	Quit
 FunctionEnd
 
 Function installsp2007
 	DetailPrint "Installing SP2 of Office 2007 required"
-	MessageBox MB_OK "You have to install Service Pack 2 for MS Office 2007. Please down and install it from http://download.microsoft.com"
-	Abort
+	MessageBox MB_OK "You have to install atleast Service Pack 2 for MS Office 2007. Please down and install it from http://download.microsoft.com. Installer will abort now"
+	Quit
 FunctionEnd
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -175,35 +175,48 @@ ReadRegStr $R0 HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Windows\CurrentVersion\App
 ${StrContains} $0 "Office14" $R0
 ${If} $0 != "" ;i.e. its office 14
 	DetailPrint "Office 2010 found"
-	;isn't this registry only present in 64 bit systems
-	ReadRegStr $R0 HKEY_LOCAL_MACHINE "SOFTWARE\Wow6432Node\Microsoft\Office\14.0\Common\ProductVersion" "LastProduct"
-	DetailPrint "Office 2010 version is $R0"
+	;if Office 2010 is installed on vista/7
+	ReadRegStr $R0 HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Office\14.0\Common\ProductVersion" "LastProduct"
+	DetailPrint "Office 2010 version is $R0"  ; corrently all sp of office 2010 are supported
 ${Else}
 	${StrContains} $0 "Office12" $R0
-	${If} $0 != "" ;i.e. its office 14
+	${If} $0 != "" ;i.e. its office 12
 		DetailPrint "Office 2007 found"
-		ReadRegStr $R0 HKEY_LOCAL_MACHINE "SOFTWARE\Wow6432Node\Microsoft\Office\14.0\Common\ProductVersion" "LastProduct"
+		; if office 2007 is installed on vista/7
+		ReadRegStr $R0 HKEY_LOCAL_MACHINE "SOFTWARE\Microsoft\Office\12.0\Common\ProductVersion" "LastProduct"
 		DetailPrint "Office 2007 version is $R0"
-		${StrContains} $0 "12.0.64" $R0
-		${If} $0 == "" ;i.e. its not sp2 (its either sp0 or sp1)
+		${StrContains} $0 "12.0.4" $R0
+		${If} $0 != "" ;i.e. its sp0
 			;get user install sp2
+			DetailPrint "Office 2007 version is $R0, you must upgrade Office to Service Pack 2"
 			Call installsp2007
+		${Else}
+			${StrContains} $0 "12.0.62" $R0
+			${If} $0 != "" ;i.e. its sp1
+				;get user install sp2
+				DetailPrint "Office 2007 version is $R0, you must upgrade Office to Service Pack 2"
+				Call installsp2007
+			${EndIf}	
 		${EndIf}
+		
 	${Else}
-		DetailPrint "You must have Office 2007 or 2010 installed."
-		Abort
+		DetailPrint "Office 2007 or Office 2010 not found."
+		MessageBox MB_OK "You don't have any compatible version of MS Office Installer. We currently support Office 2007 and Office 2010. Installer will abort now."
+		Quit
 	${EndIf}
 ${EndIf}
 
-
-Delete $TEMP\nsisos.dll
-
-;pre reqs met
+DetailPrint "MS Office is compatabile."
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+DetailPrint "All Pre-reqs met, unpacking installation files....."
+;Delete $TEMP\nsisos.dll
 CreateDirectory $TEMP\openimages
 SetOutPath $TEMP\openimages
 File /r ..\publish\*.* 
+MessageBox MB_OK "Your computer and all installed software is compatable for Open Images, click OK to continue"
 ExecWait $OUTDIR\setup.exe
-
+Quit
 
 SectionEnd
 
