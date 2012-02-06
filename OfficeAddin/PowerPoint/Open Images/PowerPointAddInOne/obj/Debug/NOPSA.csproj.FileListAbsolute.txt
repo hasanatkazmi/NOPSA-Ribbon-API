@@ -124,3 +124,6 @@ D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\Gen
 D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\Open Images.dll
 D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\Open Images.pdb
 D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.AboutForm.resources
+D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\obj\Debug\PowerPointAddInOne.SettingsForm.resources
+D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.v4.0.Framework.dll
+D:\hiit\repo\OfficeAddin\PowerPoint\Open Images\PowerPointAddInOne\bin\Debug\Microsoft.Office.Tools.v4.0.Framework.xml

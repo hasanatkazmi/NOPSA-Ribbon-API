@@ -100,7 +100,7 @@ namespace PowerPointAddInOne
             // okButton
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(307, 9);
+            this.okButton.Location = new System.Drawing.Point(499, 9);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 0;

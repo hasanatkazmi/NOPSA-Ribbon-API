@@ -75,7 +75,7 @@ Click OK to open your default email client to sent email to Herkko Hietanen <her
 
         private void settings_img_Click(object sender, RibbonControlEventArgs e)
         {
-
+            new SettingsForm().Show();
         }
 
 
